@@ -1,0 +1,5 @@
+- database tests
+- paypal tests
+- admin panel tests
+- internationalization tests
+- login tests

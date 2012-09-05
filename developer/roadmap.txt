@@ -1,0 +1,5 @@
+- September:  Set up system, basic tests of all important components (database, paypal, admin panel, internationalization, login, etc.)
+- October:    Implement logic
+- November:   Implement design
+- December:   Testing, final bug fixing
+- 1. January: Go public

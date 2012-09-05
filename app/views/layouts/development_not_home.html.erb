@@ -1,0 +1,13 @@
+<a href="/">Home</a>
+
+<h1><%= yield(:title) + ":" %></h1>
+
+<ul>
+<% @items.each do | item | %>
+  <li><p><%= item[2..-1] %></li>
+<% end %>
+</ul>
+
+<%= yield %>
+
+<%= parent_layout 'application' %>
