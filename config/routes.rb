@@ -1,4 +1,15 @@
-Test1::Application.routes.draw do
+Vigu::Application.routes.draw do
+
+  root :to => 'development#home'
+
+  get "development/roadmap"
+
+  get "development/todo"
+
+  get "development/done"
+
+  get "development/home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
