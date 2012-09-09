@@ -1,5 +1,5 @@
 - database tests
 - paypal tests
 - admin panel tests
-- internationalization tests
+- internationalization tests with database
 - login tests

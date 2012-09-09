@@ -1,2 +1,3 @@
 - 5.9.: Set up the system on heroku
 - 5.9.: Implemented development report pages
+- 8.9.: Basic internationalization tests without database backend

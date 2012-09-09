@@ -189,6 +189,22 @@
 
         <div id="getting-started">
           <p>More content comming soon...</p>
+          <h1><%= t :language %></h1>
+
+          <% if I18n.locale == :de %>
+            <%= link_to "English", :locale=>:en%>
+            <%= link_to "Espanol", :locale=>:es%>
+
+          <% elsif I18n.locale == :en %>
+
+            <%= link_to "Deutsch", :locale=>:de%>
+            <%= link_to "Espanol", :locale=>:es%>
+
+          <% else %>
+            <%= link_to "Deutsch", :locale=>:de%>
+            <%= link_to "English", :locale=>:en%>
+          <%end%>
+
         </div>
       </div>
     </div>
