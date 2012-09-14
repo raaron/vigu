@@ -1,5 +1,7 @@
 Vigu::Application.routes.draw do
 
+  resources :translations
+
   root to: 'development#home'
 
   match '/development/home',    to: 'development#home'
