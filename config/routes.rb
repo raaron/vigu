@@ -1,14 +1,11 @@
 Vigu::Application.routes.draw do
 
-  root :to => 'development#home'
+  root to: 'development#home'
 
-  get "development/roadmap"
-
-  get "development/todo"
-
-  get "development/done"
-
-  get "development/home"
+  match '/development/home',    to: 'development#home'
+  match 'development/roadmap', to: 'development#roadmap'
+  match 'development/todo',    to: 'development#todo'
+  match 'development/done',    to: 'development#done'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

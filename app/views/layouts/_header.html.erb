@@ -1,0 +1,16 @@
+<% if I18n.locale == :de %>
+  <%= link_to "English", :locale=>:en %>
+  <%= link_to "Espanol", :locale=>:es %>
+
+<% elsif I18n.locale == :en %>
+
+  <%= link_to "Deutsch", :locale=>:de %>
+  <%= link_to "Espanol", :locale=>:es %>
+
+<% else %>
+  <%= link_to "Deutsch", :locale=>:de %>
+  <%= link_to "English", :locale=>:en %>
+<%end%>
+
+
+<%= t :language %>

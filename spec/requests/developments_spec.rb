@@ -1,35 +1,37 @@
 require 'spec_helper'
 
 describe "Development" do
+
+  subject { page }
   describe "Home page" do
 
-    it "should have the content 'Vision Guatemala'" do
-      visit '/development/home'
-      page.should have_content('Vision Guatemala')
-    end
+    it {
+      visit root_path
+      should have_content('Vision Guatemala')
+    }
 
-    it "should display german text as default" do
-      visit '/development/home'
-      page.should have_content('Deutsch')
-    end
+    it {
+      visit root_path
+      should have_content('Deutsch')
+    }
 
-    it "should display german text for german users" do
+    it {
       ENV['HTTP_ACCEPT_LANGUAGE'] = 'de'
-      visit '/development/home'
-      page.should have_content('Deutsch')
-    end
+      visit root_path
+      should have_content('Deutsch')
+    }
 
-    it "should display spanish text for spanish users" do
+    it {
       ENV['HTTP_ACCEPT_LANGUAGE'] = 'es-gt'
-      visit '/development/home'
-      page.should have_content('Espanol')
-    end
+      visit root_path
+      should have_content('Espanol')
+    }
 
-    it "should display english text for english users" do
+    it {
       ENV['HTTP_ACCEPT_LANGUAGE'] = 'en'
-      visit '/development/home'
-      page.should have_content('English')
-    end
+      visit root_path
+      should have_content('English')
+    }
 
   end
 end
