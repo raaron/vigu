@@ -1,6 +1,4 @@
 class DevelopmentController < ApplicationController
-  def home
-  end
 
   def roadmap
     @items = File.readlines(Rails.root.join("developer", "roadmap.txt"))

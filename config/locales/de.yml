@@ -1,2 +1,5 @@
 de:
   language: "Deutsch!"
+  title: "Titel"
+  description: "Beschreibung"
+  save: "Speichern"

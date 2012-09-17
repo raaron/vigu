@@ -2,9 +2,17 @@ Vigu::Application.routes.draw do
 
   resources :translations
 
-  root to: 'development#home'
+  # namespace :admin do
+  #   resource :home
+  # end
 
-  match '/development/home',    to: 'development#home'
+  root to: "home#show"
+
+
+  match 'admin',               to: 'admin/home#show'
+  match 'admin/create',        to: 'admin/home#create'
+
+  match 'development/home',    to: 'development#home'
   match 'development/roadmap', to: 'development#roadmap'
   match 'development/todo',    to: 'development#todo'
   match 'development/done',    to: 'development#done'
