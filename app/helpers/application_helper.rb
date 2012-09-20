@@ -75,6 +75,7 @@ module ApplicationHelper
   def pic_display_with_caption_input(image, size, form=nil)
     pic_display(image, size, form) +
     line_input_caption(image.caption, form)
+    # line_input_caption(t(image.get_caption_tag), form)
   end
 
   def pic_form(image, form=nil)

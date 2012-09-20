@@ -18,6 +18,10 @@ class Paragraph < ActiveRecord::Base
   def update_translation
     update_translations({get_title_tag => title})
     update_translations({get_body_tag => body})
+    # images.each do |image|
+    #   logger.debug "ddddddddddddddddddddddddddd" + image.caption
+    #   image.update_translation
+    # end
   end
 
   def insert_empty_translations
@@ -26,11 +30,12 @@ class Paragraph < ActiveRecord::Base
   end
 
   def to_s
-    "Paragraph:\n\t\t\t" + ["ID: #{id}", "Title: #{title}", "Body: #{body}"].join("\n\t\t\t") + images.map{|i| i.to_s}.join("\n\t\t\t\t")
+    "Paragraph:\n\t\t\t" +
+    ["ID: #{id}", "Title: #{title}", "Body: #{body}"].join("\n\t\t\t") + "\n\t\t\t" +
+    images.map{|i| i.to_s}.join("\n\t\t\t\t")
   end
 
-  private
   def get_tag(part)
-    [page.name, section, part, id].join('_')
+    [page.name, section, id, part].join('_')
   end
 end

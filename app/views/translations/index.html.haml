@@ -1,0 +1,21 @@
+%h1 Translations
+%ul
+  - @translations.each do |t|
+    %li
+      = "#{t.locale}: #{t.key}: #{t.value}"
+
+%h2 Add Translation
+= form_tag translations_path do
+  %p
+    = label_tag :locale
+    %br/
+    = text_field_tag :locale
+  %p
+    = label_tag :key
+    %br/
+    = text_field_tag :key
+  %p
+    = label_tag :value
+    %br/
+    = text_field_tag :value
+  %p= submit_tag "Submit"

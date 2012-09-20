@@ -1,6 +1,6 @@
 class TranslationsController < ApplicationController
   def index
-    @translations = TRANSLATION_STORE
+    @translations = Translation.all
   end
 
 
