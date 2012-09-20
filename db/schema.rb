@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917193520) do
+ActiveRecord::Schema.define(:version => 20120920184804) do
 
   create_table "images", :force => true do |t|
     t.string   "caption"
@@ -40,5 +40,13 @@ ActiveRecord::Schema.define(:version => 20120917193520) do
   end
 
   add_index "paragraphs", ["page_id"], :name => "index_paragraphs_on_page_id"
+
+  create_table "translations", :force => true do |t|
+    t.string  "locale"
+    t.string  "key"
+    t.text    "value"
+    t.text    "interpolations"
+    t.boolean "is_proc",        :default => false
+  end
 
 end

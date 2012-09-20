@@ -20,6 +20,9 @@ end
 gem 'jquery-rails', '2.0.2'
 gem 'redis'
 gem "paperclip", "~> 3.0"
+gem 'i18n-active_record',
+      :git => 'git://github.com/svenfuchs/i18n-active_record.git',
+      :require => 'i18n/active_record'
 
 group :test do
   gem 'capybara', '1.1.2'
