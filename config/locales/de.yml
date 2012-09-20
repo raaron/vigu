@@ -1,5 +1,10 @@
 de:
   language: "Deutsch!"
   title: "Titel"
-  description: "Beschreibung"
+  body: "Beschreibung"
+  add_picture: "Bild hinzufügen"
   save: "Speichern"
+  paragraph: "Paragraph"
+  add: "hinzufügen"
+  remove: "löschen"
+  caption: "Bildbeschreibung"

@@ -1,5 +1,5 @@
 - database tests
 - paypal tests
 - admin panel tests
-- internationalization tests with database
 - login tests
+- Enable redis on heroku: https://dashboard.heroku.com/addons/redistogo+nano

@@ -10,7 +10,8 @@ Vigu::Application.routes.draw do
 
 
   match 'admin',               to: 'admin/home#show'
-  match 'admin/create',        to: 'admin/home#create'
+  match 'admin/new_paragraph', to: 'admin/home#new_paragraph'
+  match 'admin/update',        to: 'admin/home#update'
 
   match 'development/home',    to: 'development#home'
   match 'development/roadmap', to: 'development#roadmap'

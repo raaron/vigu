@@ -1,5 +1,1 @@
-= form_tag admin_create_path do
-  = line_input_title(t(:home_title), :title)
-  = text_input_desctiption(t(:home_descr), :descr)
-  %p= submit_tag t(:save)
-
+= paragraphs_form(admin_new_paragraph_path, admin_update_path, @page)
