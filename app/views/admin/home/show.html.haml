@@ -1,17 +1,2 @@
-/= paragraphs_form(admin_new_paragraph_path, admin_update_path, @page)
-
-= form_for @page, :url => admin_update_path, :html => { :multipart => true } do |f|
-
-  = f.fields_for :paragraphs do |form|
-    - paragraph = form.object
-    - paragraph.images.build
-    = form.fields_for :images do |builder|
-      - image = builder.object
-      - if image.new_record?
-        = pic_input_with_caption(builder)
-      - else
-        = image_tag image.photo.url(:small)
-        = line_input_caption(image.caption, builder)
-        = check_box_destroy(builder)
-
-  = f.submit t(:save)
+- provide(:title, admin_title(t(:home)))
+= paragraphs_form(admin_new_paragraph_path, admin_update_path, @page)

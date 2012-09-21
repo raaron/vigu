@@ -1,4 +1,6 @@
 %p
-  = form.label t(:add_picture)
-  %br/
+  = form.label t_add(:picture)
+  %br
   = form.file_field :photo
+  %br
+  = form.submit t_add(:caption)

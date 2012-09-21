@@ -1,0 +1,3 @@
+%h1= "Paragraphs:"
+= link_to("#{t(:paragraph)} #{t(:add)}", new_paragraph_path)
+= deletable_list(method(:edit_paragraph_path))

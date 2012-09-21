@@ -1,6 +1,7 @@
 Vigu::Application.routes.draw do
 
   resources :translations
+  resources :paragraphs
 
   # namespace :admin do
   #   resource :home
@@ -13,7 +14,6 @@ Vigu::Application.routes.draw do
   match 'admin/new_paragraph', to: 'admin/home#new_paragraph'
   match 'admin/update',        to: 'admin/home#update'
 
-  match 'development/home',    to: 'development#home'
   match 'development/roadmap', to: 'development#roadmap'
   match 'development/todo',    to: 'development#todo'
   match 'development/done',    to: 'development#done'

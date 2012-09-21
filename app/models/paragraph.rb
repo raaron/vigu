@@ -5,7 +5,8 @@ class Paragraph < ActiveRecord::Base
   has_many :images, :dependent => :destroy
   attr_accessible :title, :body, :section, :page, :images_attributes, :images
   attr_accessor :body, :title
-  accepts_nested_attributes_for :images, :reject_if => proc { |attributes| attributes['photo'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['photo'].blank? }
+  after_destroy :remove_translation
 
   def get_title_tag
     get_tag('title')
@@ -18,24 +19,35 @@ class Paragraph < ActiveRecord::Base
   def update_translation
     update_translations({get_title_tag => title})
     update_translations({get_body_tag => body})
-    # images.each do |image|
-    #   logger.debug "ddddddddddddddddddddddddddd" + image.caption
-    #   image.update_translation
-    # end
   end
 
-  def insert_empty_translations
+  def insert_empty_translation
     insert_empty_translations_for_tag(get_title_tag)
     insert_empty_translations_for_tag(get_body_tag)
   end
 
+  def remove_translation
+    remove_translations_for_tag(get_title_tag)
+    remove_translations_for_tag(get_body_tag)
+  end
+
   def to_s
     "Paragraph:\n\t\t\t" +
-    ["ID: #{id}", "Title: #{title}", "Body: #{body}"].join("\n\t\t\t") + "\n\t\t\t" +
+    ["ID: #{id}", "Title: #{I18n.translate(get_title_tag)}", "Body: #{I18n.translate(get_body_tag)}"].join("\n\t\t\t") + "\n\t\t\t" +
     images.map{|i| i.to_s}.join("\n\t\t\t\t")
   end
 
   def get_tag(part)
     [page.name, section, id, part].join('_')
+  end
+
+  def update_caption_translation(pics_attributes)
+    pics_attributes.values.each do |i|
+      if i.has_key?(:id)
+        image = Image.find_by_id(i[:id])
+        image.caption = i[:caption]
+        image.update_translation
+      end
+    end
   end
 end

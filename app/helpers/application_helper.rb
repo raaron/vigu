@@ -10,6 +10,10 @@ module ApplicationHelper
     end
   end
 
+  def admin_title(name)
+    "#{name.capitalize} Admin"
+  end
+
   def update_translations(translations)
     I18n.backend.store_translations(I18n.locale, translations)
   end
@@ -17,6 +21,12 @@ module ApplicationHelper
   def insert_empty_translations_for_tag(tag)
     [:en, :de, :es].each do |lang|
       I18n.backend.store_translations(lang, {tag => ''})
+    end
+  end
+
+  def remove_translations_for_tag(tag)
+    [:en, :de, :es].each do |lang|
+      Translation.where(:key => tag).destroy_all
     end
   end
 
@@ -29,8 +39,24 @@ module ApplicationHelper
     return text.gsub("\n", '<br/>').html_safe
   end
 
-  def render_partial(name, locals)
-    render :partial => 'layouts/' + name, :locals => locals
+  def t_add(symbol_noun)
+    translate_combined(symbol_noun, :add)
+  end
+
+  def t_edit(symbol_noun)
+    translate_combined(symbol_noun, :edit)
+  end
+
+  def translate_combined(symbol_noun, symbol_verb)
+    if I18n.locale == :de
+      "#{t(symbol_noun)} #{t(symbol_verb)}"
+    else
+      "#{t(symbol_verb)} #{t(symbol_noun)}"
+    end
+  end
+
+  def render_partial(name, locals={})
+    render :partial => 'layouts/' + name.to_s, :locals => locals
   end
 
   def line_input(label_text, symbol, text='', form=nil)
@@ -64,8 +90,7 @@ module ApplicationHelper
   end
 
   def pic_input_with_caption(form=nil)
-    pic_input(form) +
-    line_input_caption('', form)
+    pic_input(form)
   end
 
   def pic_display(image, size=:small, form=nil)
@@ -74,8 +99,7 @@ module ApplicationHelper
 
   def pic_display_with_caption_input(image, size, form=nil)
     pic_display(image, size, form) +
-    line_input_caption(image.caption, form)
-    # line_input_caption(t(image.get_caption_tag), form)
+    line_input_caption(t(image.get_caption_tag), form)
   end
 
   def pic_form(image, form=nil)
@@ -110,5 +134,12 @@ module ApplicationHelper
                                        :form => form})
   end
 
+  def list()
+    render_partial(:list)
+  end
+
+  def deletable_list(edit_path)
+    render_partial(:deletable_list, {:edit_path => edit_path})
+  end
 
 end
