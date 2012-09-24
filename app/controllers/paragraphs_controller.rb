@@ -9,6 +9,7 @@ class ParagraphsController < ApplicationController
 
   def new
     @paragraph = Paragraph.new(page: Page.first, section: "main", title: "", body: "")
+
     # respond_to do |format|
     #   format.html
     #   format.json { render json: @paragraph }
@@ -27,7 +28,10 @@ class ParagraphsController < ApplicationController
 
     if @paragraph.save
       @paragraph.update_translation
-      @paragraph.update_caption_translation(params[:paragraph][:images_attributes])
+      pic_attributes = params[:paragraph][:images_attributes]
+      if pic_attributes
+        @paragraph.update_caption_translation(pic_attributes)
+      end
       redirect_to edit_paragraph_path(@paragraph)
     else
       flash.notice = @paragraph.errors.full_messages

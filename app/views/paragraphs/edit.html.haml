@@ -1,8 +1,3 @@
-- provide(:title, admin_title(t_add(:paragraph)))
-
-= form_for @paragraph, :url => paragraph_path, :html => { :multipart => true } do |f|
-  = line_input_title(title=t(@paragraph.get_title_tag), form=f)
-  = text_input_body(body=t(@paragraph.get_body_tag), form=f)
-  - @paragraph.images.build
-  = pics_form(@paragraph.images, f)
+= form_for @paragraph, :html => { :multipart => true } do |f|
+  = paragraph_form(@paragraph, f)
   = f.submit t(:save)

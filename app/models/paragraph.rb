@@ -8,7 +8,6 @@ class Paragraph < ActiveRecord::Base
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['photo'].blank? }
   after_destroy :remove_translation
   validates :section,  presence: true
-  validates :body,  presence: true
 
   def get_title_tag
     get_tag('title')
@@ -47,8 +46,10 @@ class Paragraph < ActiveRecord::Base
     pics_attributes.values.each do |i|
       if i.has_key?(:id)
         image = Image.find_by_id(i[:id])
-        image.caption = i[:caption]
-        image.update_translation
+        image.update_translation(i[:caption])
+      elsif i.has_key?(:photo)
+        image = Image.find_by_photo_file_name(i[:photo].original_filename)
+        image.update_translation(i[:caption])
       end
     end
   end

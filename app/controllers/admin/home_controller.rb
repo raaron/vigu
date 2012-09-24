@@ -6,7 +6,6 @@ class Admin::HomeController < ApplicationController
   end
 
   def show
-    logger.debug "aaaaaaaaaaa" + @page.paragraphs.to_s
   end
 
   def new_paragraph
@@ -16,7 +15,6 @@ class Admin::HomeController < ApplicationController
     @page.paragraphs << p
     p.insert_empty_translation
 
-    logger.debug @page.paragraphs.to_s
     redirect_to admin_path
   end
 

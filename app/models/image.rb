@@ -19,7 +19,8 @@ class Image < ActiveRecord::Base
     remove_translations_for_tag(get_caption_tag)
   end
 
-  def update_translation
+  def update_translation(cap)
+    caption = cap
     update_translations({get_caption_tag => caption})
   end
 

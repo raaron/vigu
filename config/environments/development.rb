@@ -34,4 +34,11 @@ Vigu::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Disable sql logging
+  config.after_initialize do
+    ActiveRecord::Base.logger = Rails.logger.clone
+    ActiveRecord::Base.logger.level = Logger::INFO
+  end
+
 end
