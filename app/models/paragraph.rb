@@ -7,6 +7,8 @@ class Paragraph < ActiveRecord::Base
   attr_accessor :body, :title
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['photo'].blank? }
   after_destroy :remove_translation
+  validates :section,  presence: true
+  validates :body,  presence: true
 
   def get_title_tag
     get_tag('title')

@@ -2,6 +2,7 @@
   = button_tag(t_add(:paragraph))
 
 = form_for page, :url => update_path, :html => { :multipart => true } do |f|
+  = page.paragraphs.to_s
 
   = f.fields_for :paragraphs do |form|
     - paragraph = form.object

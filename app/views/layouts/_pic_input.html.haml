@@ -3,4 +3,5 @@
   %br
   = form.file_field :photo
   %br
+  /= line_input_caption('', form)
   = form.submit t_add(:caption)

@@ -5,4 +5,4 @@
   = text_input_body(body=t(@paragraph.get_body_tag), form=f)
   - @paragraph.images.build
   = pics_form(@paragraph.images, f)
-  = f.submit
+  = f.submit t(:save)

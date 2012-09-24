@@ -1,22 +1,25 @@
 Vigu::Application.routes.draw do
 
-  resources :translations
-  resources :paragraphs
+root to: "home#show"
+  scope "(:locale)", :locale => /de|en|es/ do
+    resources :paragraphs
 
-  # namespace :admin do
-  #   resource :home
-  # end
+    resources :translations
 
-  root to: "home#show"
+    # namespace :admin do
+    #   resource :home
+    # end
 
+    root to: "home#show"
 
-  match 'admin',               to: 'admin/home#show'
-  match 'admin/new_paragraph', to: 'admin/home#new_paragraph'
-  match 'admin/update',        to: 'admin/home#update'
+    match 'admin',               to: 'admin/home#show'
+    match 'admin/new_paragraph', to: 'admin/home#new_paragraph'
+    match 'admin/update',        to: 'admin/home#update'
 
-  match 'development/roadmap', to: 'development#roadmap'
-  match 'development/todo',    to: 'development#todo'
-  match 'development/done',    to: 'development#done'
+    match 'development/roadmap', to: 'development#roadmap'
+    match 'development/todo',    to: 'development#todo'
+    match 'development/done',    to: 'development#done'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

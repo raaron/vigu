@@ -9,10 +9,10 @@ class ParagraphsController < ApplicationController
 
   def new
     @paragraph = Paragraph.new(page: Page.first, section: "main", title: "", body: "")
-    respond_to do |format|
-      format.html
-      format.json { render json: @paragraph }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: @paragraph }
+    # end
   end
 
   def edit
@@ -27,10 +27,11 @@ class ParagraphsController < ApplicationController
 
     if @paragraph.save
       @paragraph.update_translation
-      redirect_to paragraphs_path
+      @paragraph.update_caption_translation(params[:paragraph][:images_attributes])
+      redirect_to edit_paragraph_path(@paragraph)
     else
       flash.notice = @paragraph.errors.full_messages
-      redirect_to paragraphs_path
+      redirect_to edit_paragraph_path(@paragraph)
     end
   end
 
@@ -43,7 +44,7 @@ class ParagraphsController < ApplicationController
       flash.notice = "ERROR" + @paragraph.errors.full_messages.to_s
     end
 
-    redirect_to paragraphs_path
+    redirect_to edit_paragraph_path(@paragraph)
   end
 
   def destroy
