@@ -138,8 +138,8 @@ module ApplicationHelper
     render_partial(:list)
   end
 
-  def deletable_list(edit_path)
-    render_partial(:deletable_list, {:edit_path => edit_path})
+  def editable_list(edit_path)
+    render_partial(:editable_list, {:edit_path => edit_path})
   end
 
 end

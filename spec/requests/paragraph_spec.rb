@@ -208,7 +208,7 @@ describe "Paragraph" do
 
     it {
       path = paragraph_path(Paragraph.first)
-      expect { driver.submit(:delete, path, {}) }.to(
+      expect { page.driver.submit(:delete, path, {}) }.to(
                                           change(Paragraph, :count).by(-1) &&
                                           change(Translation, :count).by(-5))
 

@@ -2,3 +2,5 @@
 - 5.9.:  Implemented development report pages
 - 8.9.:  Basic internationalization tests without database backend
 - 17.9.: Internationalization tests with database
+- 25.9.: Set up testing
+- 25.9.: Prototype for Content Management System

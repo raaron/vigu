@@ -1,0 +1,8 @@
+%h1= t(@paragraph.get_title_tag)
+= t(@paragraph.get_body_tag)
+%br
+- @paragraph.images.each do |image|
+  = image_tag(image.photo.url(:original))
+  %br
+  = t(image.get_caption_tag)
+  %br

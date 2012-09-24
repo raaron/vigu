@@ -1,5 +1,4 @@
-- database tests
 - paypal tests
-- admin panel tests
+- admin login tests
+- admin panel prototype
 - login tests
-- Enable redis on heroku: https://dashboard.heroku.com/addons/redistogo+nano

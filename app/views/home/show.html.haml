@@ -1,3 +1,5 @@
 - provide(:title, t(:home).capitalize)
-%h1= t :home_title
-%p= translate_newlines(t :home_descr)
+
+- @page.paragraphs.each do |paragraph|
+  - @paragraph = paragraph
+  = render_partial('paragraph')

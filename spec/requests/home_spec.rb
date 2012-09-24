@@ -3,8 +3,25 @@
 require 'spec_helper'
 
 describe "Home" do
+  let(:paragraph)  { FactoryGirl.create(:paragraph, page: @page) }
+  let(:caption0)  { "caption0" }
 
-  before { visit root_path }
+  def add_file(nr, filename)
+    attach_file("paragraph_images_attributes_#{nr}_photo", Rails.root.join('spec', 'img', filename))
+  end
+
+  def add_file_with_caption(nr, filename, caption)
+    add_file(nr, filename)
+    fill_in "paragraph_images_attributes_#{nr}_caption",  with: caption
+  end
+
+  before {
+    app.default_url_options = { :locale => :de }
+    @page = Page.new(name: "home")
+    @page.save
+    paragraph.save
+    visit root_path
+  }
 
   subject { page }
 
@@ -21,19 +38,33 @@ describe "Home" do
   describe "Navigation" do
 
     it {
-      should have_link('Home', href: get_url(root_path))
-      should have_link('Administration', href: get_url(admin_path))
-      should have_link('Übersetzung', href: get_url(translations_path))
-      should have_link('Roadmap', href: get_url(development_roadmap_path))
-      should have_link("TODO's", href: get_url(development_todo_path))
-      should have_link('Done', href: get_url(development_done_path))
+      should have_link('Home', href: root_path)
+      should have_link('Administration', href: admin_path)
+      should have_link('Übersetzung', href: translations_path)
+      should have_link('Roadmap', href: development_roadmap_path)
+      should have_link("TODO's", href: development_todo_path)
+      should have_link('Done', href: development_done_path)
     }
 
   end
 
   describe "Content" do
+    before do
+      visit edit_paragraph_path(Paragraph.first)
+      fill_in "paragraph_title", with: paragraph.title
+      fill_in "paragraph_body",  with: paragraph.body
+      add_file_with_caption(0, 'foo.png', caption0)
+      click_button t(:save)
+      visit root_path
+    end
 
-    it { should have_content('Home Title') }
+    it {
+      should have_content(paragraph.title)
+      should have_content(paragraph.body)
+      img_path = Rails.root.join('spec', 'img', "foo.png")
+      should have_css("img", :src => img_path)
+      should have_content(caption0)
+    }
   end
 
   describe "Internationalization" do
