@@ -1,4 +1,9 @@
-= line_input_title(title=t(paragraph.get_title_tag), form=form)
-= text_input_body(body=t(paragraph.get_body_tag), form=form)
-- paragraph.images.build
-= pics_form(paragraph.images, form)
+- @paragraph.images.build
+
+%table
+  = render_partial(:admin_input_title, {:form => form})
+  = render_partial(:admin_input_body, {:form => form})
+  = render_partial(:admin_input_pics, {:form => form})
+  /%tr
+  /  %td= pics_form(paragraph.images, form)
+  /  %td= pics_form(paragraph.images, form)

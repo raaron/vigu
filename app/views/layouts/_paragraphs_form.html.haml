@@ -1,12 +1,12 @@
 = form_tag(new_paragraph_path) do
   = button_tag(t_add(:paragraph))
 
-= form_for page, :url => update_path, :html => { :multipart => true } do |f|
+= form_for @page, :url => update_path, :html => { :multipart => true } do |page_builder|
 
-  = f.fields_for :paragraphs do |form|
-    - paragraph = form.object
-    = check_box_destroy(form)
-    = paragraph_form(paragraph, form)
+  = page_builder.fields_for :paragraphs do |paragraph_builder|
+    - @paragraph = paragraph_builder.object
+    = check_box_destroy(paragraph_builder)
+    = render_partial(:paragraph_form, {:form => paragraph_builder})
 
-  = f.submit t(:save)
+  = page_builder.submit t(:save)
 

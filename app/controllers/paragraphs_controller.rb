@@ -8,12 +8,7 @@ class ParagraphsController < ApplicationController
   end
 
   def new
-    @paragraph = Paragraph.new(page: Page.first, section: "main", title: "", body: "")
-
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: @paragraph }
-    # end
+    @paragraph = Paragraph.new(page: Page.first, section: "main", default_title: "", default_body: "", title: "", body: "")
   end
 
   def edit

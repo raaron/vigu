@@ -1,0 +1,11 @@
+= render_partial(:admin_row,
+  {:left => image_tag(@image.photo.url(:small)),
+   :right => ''})
+
+= render_partial(:admin_row,
+  {:left => check_box_destroy(form=form),
+   :right => ''})
+
+= render_partial(:admin_row,
+  {:left => line_input_caption(symbol=:default_caption, caption=@image.get_default_caption, form=form),
+   :right => line_input_caption(symbol=:caption, caption=@image.get_caption, form=form)})

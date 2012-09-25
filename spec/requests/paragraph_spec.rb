@@ -84,7 +84,7 @@ describe "Paragraph" do
     describe "Without picture" do
 
       it {
-        check_paragraph_translation_change(1, 2)
+        check_paragraph_translation_change(1, 4)
         check_paragraph
         check_image_count(0)
         # should have_content(paragraph.title)    # THIS FAILS FOR SOME STRANGE REASON, IN THE GENERATED HTML, THE TITLE IS THERE...
@@ -97,7 +97,7 @@ describe "Paragraph" do
       before { add_file(0, 'foo.png') }
 
       it {
-        check_paragraph_translation_change(1, 5)
+        check_paragraph_translation_change(1, 7)
         check_paragraph
         check_image_count(1)
         should have_content(paragraph.body)
@@ -109,7 +109,7 @@ describe "Paragraph" do
       before { add_file_with_caption(0, 'foo.png', caption0) }
 
       it {
-        check_paragraph_translation_change(1, 5)
+        check_paragraph_translation_change(1, 7)
         check_paragraph
         check_image_count(1)
         check_caption(0, caption0)
@@ -123,7 +123,7 @@ describe "Paragraph" do
       before { add_file_with_caption(0, 'foo.png', caption0) }
 
       it {
-        check_paragraph_translation_change(1, 5)
+        check_paragraph_translation_change(1, 7)
         check_paragraph
         add_file_with_caption(1, 'bar.png', caption1)
         check_paragraph_translation_change(1, 3)
@@ -210,7 +210,7 @@ describe "Paragraph" do
       path = paragraph_path(Paragraph.first)
       expect { page.driver.submit(:delete, path, {}) }.to(
                                           change(Paragraph, :count).by(-1) &&
-                                          change(Translation, :count).by(-5))
+                                          change(Translation, :count).by(-7))
 
       current_path.should == paragraphs_path
       should have_link(t_add(:paragraph), href: new_paragraph_path)

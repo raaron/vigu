@@ -1,3 +1,3 @@
 = form_for @paragraph, :html => { :multipart => true } do |f|
-  = paragraph_form(@paragraph, f)
+  = render_partial(:paragraph_form, {:form => f})
   = f.submit t(:save)

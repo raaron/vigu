@@ -26,7 +26,6 @@ class Admin::HomeController < ApplicationController
       update_caption_translation(params[:page][:paragraphs_attributes].values)
       flash.notice = "Updated successfully"
       logger.debug "* Updated: #{@page.to_s}"
-      logger.debug params[:page][:paragraphs_attributes]["0"][:images_attributes]["0"][:caption]
     else
       logger.debug @page.errors.full_messages
       flash.notice = @page.errors.full_messages

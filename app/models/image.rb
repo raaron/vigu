@@ -3,13 +3,21 @@ class Image < ActiveRecord::Base
 
   belongs_to :paragraph
   has_attached_file :photo, :styles => { :original => '250*250>', :small => "50*50" }
-  attr_accessible :caption, :photo
-  attr_accessor :caption
+  attr_accessible :caption, :default_caption, :photo
+  attr_accessor :caption, :default_caption
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 5.megabytes
 
   after_create :insert_empty_translation
   after_destroy :remove_translation
+
+  def get_caption
+    is_default_locale ? '' : t(get_caption_tag)
+  end
+
+  def get_default_caption
+    t_for_locale(I18n.default_locale, get_caption_tag)
+  end
 
   def insert_empty_translation
     insert_empty_translations_for_tag(get_caption_tag)
@@ -19,9 +27,13 @@ class Image < ActiveRecord::Base
     remove_translations_for_tag(get_caption_tag)
   end
 
-  def update_translation(cap)
-    caption = cap
-    update_translations({get_caption_tag => caption})
+  def update_translation(default_caption, caption)
+    default_caption = default_caption
+    caption = caption
+    update_translations(I18n.default_locale, {get_caption_tag => default_caption})
+    if !is_default_locale
+      update_translations(I18n.locale, {get_caption_tag => caption})
+    end
   end
 
   def to_s

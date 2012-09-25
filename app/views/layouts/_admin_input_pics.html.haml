@@ -1,0 +1,10 @@
+= form.fields_for :images do |builder|
+  - @image = builder.object
+  - if @image.new_record?
+    = render_partial(:admin_input_new_pic, {:form => builder})
+  - else
+    = render_partial(:admin_input_existing_pic, {:form => builder})
+
+= render_partial(:admin_row,
+  {:left => form.submit(t_add(:picture)),
+   :right => ''})

@@ -1,0 +1,3 @@
+= render_partial(:admin_row,
+  {:left => line_input_title(symbol=:default_title, title=@paragraph.get_default_title, form=form),
+   :right => line_input_title(symbol=:title, title=@paragraph.get_title, form=form)})

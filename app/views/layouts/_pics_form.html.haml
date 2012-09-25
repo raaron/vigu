@@ -1,8 +1,0 @@
-= form.fields_for :images do |builder|
-  - image = builder.object
-  - if image.new_record?
-    = pic_input_with_caption(builder)
-  - else
-    = pic_form(image, builder)
-= form.submit(t_add(:picture))
-%p

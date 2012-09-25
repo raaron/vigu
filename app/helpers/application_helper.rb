@@ -14,8 +14,8 @@ module ApplicationHelper
     "#{name.capitalize} Admin"
   end
 
-  def update_translations(translations)
-    I18n.backend.store_translations(I18n.locale, translations)
+  def update_translations(locale, translations)
+    I18n.backend.store_translations(locale, translations)
   end
 
   def insert_empty_translations_for_tag(tag)
@@ -64,12 +64,12 @@ module ApplicationHelper
                                   :symbol => symbol, :form => form})
   end
 
-  def line_input_title(title='', form=nil)
-    line_input(t(:title), :title, title, form)
+  def line_input_title(symbol=:title, title='', form=nil)
+    line_input(t(:title), symbol, title, form)
   end
 
-  def line_input_caption(caption='', form=nil)
-    line_input(t(:caption), :caption, caption, form)
+  def line_input_caption(symbol=:caption, caption='', form=nil)
+    line_input(t(:caption), symbol, caption, form)
   end
 
   def text_input(label_text, symbol, text='', form=nil)
@@ -77,37 +77,12 @@ module ApplicationHelper
                                   :symbol => symbol, :form => form})
   end
 
-  def text_input_body(body='', form=nil)
-    text_input(t(:body), :body, body, form)
+  def text_input_body(symbol=:body, body='', form=nil)
+    text_input(t(:body), symbol, body, form)
   end
 
-  def paragraph_form(paragraph, form=nil)
-    render_partial('paragraph_form', {:paragraph => paragraph, :form => form})
-  end
-
-  def pic_input(form=nil)
-    render_partial('pic_input', {:form => form})
-  end
-
-  def pic_input_with_caption(form=nil)
-    pic_input(form)
-  end
-
-  def pic_display(image, size=:small, form=nil)
-    image_tag image.photo.url(size)
-  end
-
-  def pic_display_with_caption_input(image, size, form=nil)
-    pic_display(image, size, form) +
-    line_input_caption(t(image.get_caption_tag), form)
-  end
-
-  def pic_form(image, form=nil)
-    render_partial('pic_form', {:image => image, :form => form})
-  end
-
-  def pics_form(images, form=nil)
-    render_partial('pics_form', {:images => images, :form => form})
+  def paragraph_form(form=nil)
+    render_partial('paragraph_form', {:form => form})
   end
 
   def labeled_check_box(label_text, symbol, form=nil)
@@ -122,16 +97,9 @@ module ApplicationHelper
                                          :form => form})
   end
 
-  def paragraph_form(paragraph, form=nil)
-    render_partial('paragraph_form', {:paragraph => paragraph,
-                                      :form => form})
-  end
-
-  def paragraphs_form(new_paragraph_path, update_path, page, form=nil)
-    render_partial('paragraphs_form', {:page => page,
-                                       :new_paragraph_path => new_paragraph_path,
-                                       :update_path => update_path,
-                                       :form => form})
+  def paragraphs_form(new_paragraph_path, update_path)
+    render_partial('paragraphs_form', {:new_paragraph_path => new_paragraph_path,
+                                       :update_path => update_path})
   end
 
   def list()
@@ -140,6 +108,26 @@ module ApplicationHelper
 
   def editable_list(edit_path)
     render_partial(:editable_list, {:edit_path => edit_path})
+  end
+
+  def t(tag)
+    I18n.translate(tag)
+  end
+
+  def t_for_locale(locale, tag)
+    begin
+      I18n.backend.translate(locale, tag)
+    rescue
+      ""
+    end
+  end
+
+  def l(txt, nr=0)
+    logger.debug "----- #{nr}: #{txt}"
+  end
+
+  def is_default_locale
+    I18n.locale == I18n.default_locale
   end
 
 end
