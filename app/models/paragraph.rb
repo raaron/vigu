@@ -33,6 +33,10 @@ class Paragraph < ActiveRecord::Base
     get_tag('body')
   end
 
+  def get_edit_path
+    edit_paragraph_path(self)
+  end
+
   def update_translation
     update_translations(I18n.default_locale, {get_title_tag => default_title})
     update_translations(I18n.default_locale, {get_body_tag => default_body})

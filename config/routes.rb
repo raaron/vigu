@@ -1,20 +1,24 @@
 Vigu::Application.routes.draw do
 
-root to: "home#show"
   scope "(:locale)", :locale => /de|en|es/ do
     resources :paragraphs
 
     resources :translations
 
-    # namespace :admin do
-    #   resource :home
-    # end
+    namespace :admin do
+      match 'news',               to: 'news#edit'
+      match 'news/new_paragraph', to: 'news#new_paragraph'
+      match 'news/update',        to: 'news#update'
 
-    root to: "home#show"
+      match '/',               to: 'home#edit'
+      match 'new_paragraph', to: 'home#new_paragraph'
+      match 'update',        to: 'home#update'
+    end
 
-    match 'admin',               to: 'admin/home#show'
-    match 'admin/new_paragraph', to: 'admin/home#new_paragraph'
-    match 'admin/update',        to: 'admin/home#update'
+
+    root to: "home#index"
+
+    match 'news',               to: 'news#index'
 
     match 'development/roadmap', to: 'development#roadmap'
     match 'development/todo',    to: 'development#todo'

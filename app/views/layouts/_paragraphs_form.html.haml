@@ -1,5 +1,4 @@
-= form_tag(new_paragraph_path) do
-  = button_tag(t_add(:paragraph))
+= button_to("#{t_add(:paragraph)}", :action => :new_paragraph)
 
 = form_for @page, :url => update_path, :html => { :multipart => true } do |page_builder|
 

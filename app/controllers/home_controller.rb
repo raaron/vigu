@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  def show
+  def index
     @page = Page.find_by_name('home')
   end
 

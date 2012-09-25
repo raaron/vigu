@@ -4,7 +4,7 @@ de:
   body: "Beschreibung"
   picture: "Bild"
   save: "Speichern"
-  paragraph: "Paragraph"
+  paragraph: "Abschnitt"
   add: "hinzufügen"
   remove: "löschen"
   caption: "Bildbeschreibung"
@@ -12,3 +12,4 @@ de:
   translations: "Übersetzungen"
   admin: "Administration"
   edit: "bearbeiten"
+  news: "News"

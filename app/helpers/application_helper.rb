@@ -106,10 +106,6 @@ module ApplicationHelper
     render_partial(:list)
   end
 
-  def editable_list(edit_path)
-    render_partial(:editable_list, {:edit_path => edit_path})
-  end
-
   def t(tag)
     I18n.translate(tag)
   end

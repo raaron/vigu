@@ -1,0 +1,4 @@
+- provide(:title, admin_title(t(:news)))
+%h1= "News:"
+
+= paragraphs_form(admin_news_new_paragraph_path, admin_news_update_path)

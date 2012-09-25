@@ -3,5 +3,5 @@
     %tr
       %td= item.to_s
       %td= link_to 'Show', item
-      %td= link_to 'Edit', edit_paragraph_path(item)
+      %td= link_to 'Edit', edit_path.call(item)
       %td= link_to 'Destroy', item, method: :delete
