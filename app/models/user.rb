@@ -19,7 +19,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :admin, :bought_book, :country, :email, :fname, :lname,
+  attr_accessible :bought_book, :country, :email, :fname, :lname,
         :newsletter, :place, :plz, :street, :password, :password_confirmation
   has_secure_password
 

@@ -1,5 +1,7 @@
 class Admin::PageController < ApplicationController
 
+  before_filter :admin_user
+
   def new_paragraph
     p = Paragraph.new(page: @page, section: 'main', title: "", body: "")
     logger.debug "* Inserted new: #{p.to_s}"
