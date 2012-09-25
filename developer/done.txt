@@ -3,4 +3,7 @@
 - 8.9.:  Basic internationalization tests without database backend
 - 17.9.: Internationalization tests with database
 - 25.9.: Set up testing
-- 25.9.: Prototype for Content Management System
+- 25.9.: Prototype for Content Management System (CMS)
+- 26.9.: Admin login and protection for CMS
+- 26.9.: Admin panel prototype
+- 26.9.: User login tests

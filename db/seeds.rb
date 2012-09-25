@@ -12,5 +12,5 @@ Page.create(name: "news")
 u = User.create(fname: "Aaron", lname: "Richiger", email: "a.richi@bluewin.ch",
                 password: "asdfasdf", password_confirmation: "asdfasdf")
 u.toggle!(:admin)
-u = User.create(fname: "Nicola", lname: "Rogen", email: "vigu@vigu.com",
+u = User.create(fname: "Nicola", lname: "Roten", email: "vigu@vigu.com",
                 password: "asdfasdf", password_confirmation: "asdfasdf")

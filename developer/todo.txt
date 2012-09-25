@@ -1,4 +1,1 @@
 - paypal tests
-- admin login tests
-- admin panel prototype
-- login tests
