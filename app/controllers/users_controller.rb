@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  before_filter :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_filter :correct_user,   only: [:edit, :update]
+
+  def index
+    @users = User.all
+  end
 
   def new
     @user = User.new
@@ -33,5 +39,20 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+
+  private
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        redirect_to login_url, notice: "Please log in."
+      end
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
 
 end

@@ -36,9 +36,9 @@ Vigu::Application.configure do
   config.assets.debug = true
 
   # Disable sql logging
-  config.after_initialize do
-    ActiveRecord::Base.logger = Rails.logger.clone
-    ActiveRecord::Base.logger.level = Logger::INFO
-  end
+  # config.after_initialize do
+  #   ActiveRecord::Base.logger = Rails.logger.clone
+  #   ActiveRecord::Base.logger.level = Logger::INFO
+  # end
 
 end

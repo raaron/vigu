@@ -10,6 +10,24 @@ describe "User pages" do
 
   subject { page }
 
+  describe "index" do
+    before do
+      login FactoryGirl.create(:user)
+      FactoryGirl.create(:user, fname: "Bob", email: "bob@example.com")
+      FactoryGirl.create(:user, fname: "Ben", email: "ben@example.com")
+      visit users_path
+    end
+
+    it { should have_selector('title', text: 'All users') }
+    it { should have_selector('h1',    text: 'All users') }
+
+    it "should list each user" do
+      User.all.each do |user|
+        page.should have_selector('li', text: user.fname)
+      end
+    end
+  end
+
   describe "register page" do
     before { visit register_path }
 
@@ -57,7 +75,10 @@ describe "User pages" do
 
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
+    before {
+      login(user)
+      visit edit_user_path(user)
+    }
 
     describe "page" do
       it { should have_selector('h1',    text: "Update your profile") }
@@ -68,6 +89,23 @@ describe "User pages" do
       before { click_button "Speichern" }
 
       # it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      let(:new_fname)  { "New fname" }
+      let(:new_email) { "new@example.com" }
+      before do
+        fill_in "Fname",            with: new_fname
+        fill_in "Email",            with: new_email
+        fill_in "Password",         with: user.password
+        fill_in "Confirmation", with: user.password
+        click_button "Speichern"
+      end
+
+      it { should have_selector('title', text: new_fname) }
+      it { should have_link('Logout', href: logout_path) }
+      specify { user.reload.fname.should  == new_fname }
+      specify { user.reload.email.should == new_email }
     end
   end
 
