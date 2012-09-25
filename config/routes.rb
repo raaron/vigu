@@ -1,6 +1,8 @@
 Vigu::Application.routes.draw do
 
   scope "(:locale)", :locale => /de|en|es/ do
+    resources :users
+    resources :sessions, only: [:new, :create, :destroy]
     resources :paragraphs
 
     resources :translations
@@ -19,6 +21,10 @@ Vigu::Application.routes.draw do
     root to: "home#index"
 
     match 'news',               to: 'news#index'
+
+    match '/register',          to: 'users#new'
+    match '/login',             to: 'sessions#new'
+    match '/logout',            to: 'sessions#destroy', via: :delete
 
     match 'development/roadmap', to: 'development#roadmap'
     match 'development/todo',    to: 'development#todo'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921151333) do
+ActiveRecord::Schema.define(:version => 20120925185314) do
 
   create_table "images", :force => true do |t|
     t.integer  "paragraph_id"
@@ -47,5 +47,25 @@ ActiveRecord::Schema.define(:version => 20120921151333) do
     t.text    "interpolations"
     t.boolean "is_proc",        :default => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "street"
+    t.string   "plz"
+    t.string   "place"
+    t.string   "country"
+    t.boolean  "bought_book"
+    t.boolean  "newsletter"
+    t.string   "password_digest"
+    t.boolean  "admin"
+    t.string   "email"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "remember_token"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end

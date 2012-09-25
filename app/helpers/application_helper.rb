@@ -87,7 +87,7 @@ module ApplicationHelper
 
   def labeled_check_box(label_text, symbol, form=nil)
     render_partial('labeled_check_box', {:label_text => label_text,
-                                         :symbol => :_destroy,
+                                         :symbol => symbol,
                                          :form => form})
   end
 

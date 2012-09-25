@@ -3,7 +3,8 @@
 require 'spec_helper'
 
 describe "Home" do
-  let(:paragraph)  { FactoryGirl.create(:paragraph, page: @page) }
+  let(:home_page)  { FactoryGirl.create(:page, name: 'home') }
+  let(:paragraph)  { FactoryGirl.create(:paragraph, page: home_page) }
   let(:caption0)  { "caption0" }
 
   def add_file(nr, filename)
@@ -17,8 +18,7 @@ describe "Home" do
 
   before {
     app.default_url_options = { :locale => :de }
-    @page = Page.new(name: "home")
-    @page.save
+    home_page.save
     paragraph.save
     visit root_path
   }
@@ -41,6 +41,8 @@ describe "Home" do
       should have_link('Home', href: root_path)
       should have_link('Administration', href: admin_path)
       should have_link('Übersetzung', href: translations_path)
+      should have_link('News', href: news_path)
+      should have_link('Registrieren', href: register_path)
       should have_link('Roadmap', href: development_roadmap_path)
       should have_link("TODO's", href: development_todo_path)
       should have_link('Done', href: development_done_path)

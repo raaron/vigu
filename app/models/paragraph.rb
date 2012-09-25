@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: paragraphs
+#
+#  id         :integer          not null, primary key
+#  section    :string(255)
+#  page_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Paragraph < ActiveRecord::Base
   include ApplicationHelper
 

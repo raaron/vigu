@@ -2,6 +2,16 @@
   = link_to(t(:home), root_path)
   = link_to(t(:admin), admin_path)
   = link_to(t(:translations), translations_path)
+  = link_to(t(:news), news_path)
+  = link_to(t(:register).capitalize, register_path)
   = link_to("Roadmap", development_roadmap_path)
   = link_to("TODO's", development_todo_path)
   = link_to("Done", development_done_path)
+
+  - if logged_in?
+    = link_to("Users", '#')
+    = link_to("Settings", edit_user_path(current_user))
+    = link_to("Logout", logout_path, method: "delete")
+    = link_to("Profile", current_user)
+  - else
+    = link_to("Login", login_path)

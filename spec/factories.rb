@@ -6,3 +6,21 @@ FactoryGirl.define do
     page Page.first
   end
 end
+
+FactoryGirl.define do
+  factory :user do
+    fname    "Aaron"
+    lname    "Richiger"
+    email    "aaron@example.com"
+    admin    true
+    password "asdfasdf"
+    password_confirmation "asdfasdf"
+  end
+end
+
+FactoryGirl.define do
+  factory :page do
+    name        "home"
+    paragraphs  []
+  end
+end
