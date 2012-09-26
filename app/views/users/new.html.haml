@@ -2,16 +2,4 @@
 
 %h1 Register
 
-= form_for(@user) do |f|
-  = f.label :fname
-  = f.text_field :fname
-  = f.label :lname
-  = f.text_field :lname
-  = f.label :email
-  = f.text_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.label :password_confirmation, "Confirmation"
-  = f.password_field :password_confirmation
-  /= labeled_check_box(label_text="Admin", symbol=:admin, form=f)
-  = f.submit t(:register).capitalize
+= render_partial(:user_form, {:button_text => t(:register).capitalize})

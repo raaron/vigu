@@ -62,11 +62,11 @@ describe "User pages" do
 
     describe "with valid information" do
       before do
-        fill_in "Fname",        with: "Example"
-        fill_in "Lname",        with: "User"
-        fill_in "Email",        with: "user@example.com"
-        fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in t(:fname),        with: "Example"
+        fill_in t(:lname),        with: "User"
+        fill_in t(:email),        with: "user@example.com"
+        fill_in t(:password),     with: "foobar"
+        fill_in t(:password_confirmation), with: "foobar"
       end
 
       it "should create a user" do
@@ -113,11 +113,12 @@ describe "User pages" do
       let(:new_fname)  { "New fname" }
       let(:new_email) { "new@example.com" }
       before do
-        fill_in "Fname",            with: new_fname
-        fill_in "Email",            with: new_email
-        fill_in "Password",         with: user.password
-        fill_in "Confirmation", with: user.password
-        click_button "Speichern"
+
+        fill_in t(:fname),                    with: new_fname
+        fill_in t(:email),                    with: new_email
+        fill_in t(:password),                 with: user.password
+        fill_in t(:password_confirmation),    with: user.password_confirmation
+        click_button t(:save)
       end
 
       it { should have_selector('title', text: new_fname) }

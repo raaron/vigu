@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'acts_as_list'
 
 group :development, :test do
   gem 'launchy'

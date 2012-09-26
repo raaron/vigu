@@ -1,0 +1,12 @@
+= form_for(@user) do |f|
+  = line_input(label_text=t(:fname), symbol=:fname, text=@user.fname, form=f)
+  = line_input(label_text=t(:lname), symbol=:lname, text=@user.lname, form=f)
+  = line_input(label_text=t(:street), symbol=:street, text=@user.street, form=f)
+  = line_input(label_text=t(:plz), symbol=:plz, text=@user.plz, form=f)
+  = line_input(label_text=t(:place), symbol=:place, text=@user.place, form=f)
+  = line_input(label_text=t(:country), symbol=:country, text=@user.country, form=f)
+  = line_input(label_text=t(:email), symbol=:email, text=@user.email, form=f)
+  = password_input(label_text=t(:password), symbol=:password, form=f)
+  = password_input(label_text=t(:password_confirmation), symbol=:password_confirmation, form=f)
+  = labeled_check_box(label_text=t(:newsletter), symbol=:newsletter, form=f)
+  = f.submit button_text

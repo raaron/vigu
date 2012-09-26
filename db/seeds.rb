@@ -6,11 +6,28 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+include ApplicationHelper
 
-Page.create(name: "home")
-Page.create(name: "news")
+
+home_page = Page.create(name: "home")
+news_page = Page.create(name: "news")
+
+[home_page, news_page].each do |page|
+
+  3.times do |nr|
+    p = Paragraph.create(page: page, section: "main")
+
+    [:de, :en, :es].each do |locale|
+      I18n.backend.store_translations(locale, {p.get_title_tag => "#{page.name.capitalize} #{nr}"})
+      I18n.backend.store_translations(locale, {p.get_body_tag => lorem(300)})
+    end
+  end
+
+end
+
 u = User.create(fname: "Aaron", lname: "Richiger", email: "a.richi@bluewin.ch",
                 password: "asdfasdf", password_confirmation: "asdfasdf")
+
 u.toggle!(:admin)
 u = User.create(fname: "Nicola", lname: "Roten", email: "vigu@vigu.com",
                 password: "asdfasdf", password_confirmation: "asdfasdf")

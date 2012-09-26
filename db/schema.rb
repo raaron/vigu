@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925220504) do
+ActiveRecord::Schema.define(:version => 20120926172002) do
 
   create_table "images", :force => true do |t|
     t.integer  "paragraph_id"
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20120925220504) do
     t.string   "plz"
     t.string   "place"
     t.string   "country"
-    t.boolean  "bought_book"
-    t.boolean  "newsletter"
+    t.boolean  "bought_book",     :default => false
+    t.boolean  "newsletter",      :default => true
     t.string   "password_digest"
     t.boolean  "admin",           :default => false
     t.string   "email"
