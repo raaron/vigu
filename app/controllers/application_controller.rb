@@ -8,6 +8,14 @@ class ApplicationController < ActionController::Base
   #   I18n.locale = params[:locale] || I18n.default_locale
   # end
 
+  # def switch_to_admin_view
+  #   set_is_in_admin_mode(true)
+  # end
+
+  # def switch_to_normal_view
+  #   set_is_in_admin_mode(false)
+  # end
+
   def set_locale
     if params.has_key?(:locale)
       I18n.locale = params[:locale]
@@ -28,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   private
     def logged_in_user
-      unless logged_in?
+      unless is_logged_in?
         store_location
         redirect_to login_url, notice: "Please log in."
       end
@@ -40,7 +48,7 @@ class ApplicationController < ActionController::Base
     end
 
     def admin_user
-      redirect_to(root_path) unless current_user.admin?
+      redirect_to(root_path) unless is_admin?
     end
 
 end

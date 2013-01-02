@@ -1,9 +1,11 @@
 FactoryGirl.define do
   factory :paragraph do
+    sequence(:id)  { |n| n }
     sequence(:title)  { |n| "Title #{n}" }
     sequence(:body)   { |n| "Body #{n}"}
     section "main"
     page Page.first
+    date Date.new(2012, 1, 31)
   end
 end
 

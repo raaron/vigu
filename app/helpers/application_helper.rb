@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def is_in_admin_mode?
+    is_admin? and Vigu::Application.config.is_in_admin_mode
+  end
+
+  def set_is_in_admin_mode(value)
+    Vigu::Application.config.is_in_admin_mode = value
+  end
+
   # Returns the full title on a per-page basis.
   def get_title(page_title)
     base_title = "Vision Guatemala"
@@ -123,7 +131,7 @@ module ApplicationHelper
     end
   end
 
-  def l(txt, nr=0)
+  def log(txt, nr=0)
     logger.debug "----- #{nr}: #{txt}"
   end
 

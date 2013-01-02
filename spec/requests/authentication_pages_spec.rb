@@ -1,12 +1,10 @@
 require 'spec_helper'
+include ApplicationHelper
 
 describe "Authentication" do
-  let(:home_page)  { FactoryGirl.create(:page, name: 'home') }
+  let(:home_page)  { Page.find_by_name("home") }
 
-  before {
-    app.default_url_options = { :locale => :de }
-    home_page.save
-  }
+  before { app.default_url_options = { :locale => :de } }
 
   subject { page }
 
@@ -25,14 +23,12 @@ describe "Authentication" do
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before do
-        login(user)
+        login_user(user)
       end
 
       it { should have_selector('title', text: user.fname) }
 
-      it { should have_link('Users',    href: users_path) }
-      it { should have_link('Profile', href: user_path(user)) }
-      it { should have_link('Settings', href: edit_user_path(user)) }
+      it { should have_link('Profile', href: edit_user_path(user)) }
       it { should have_link('Logout', href: logout_path) }
       it { should_not have_link('Login', href: login_path) }
 
@@ -53,7 +49,7 @@ describe "Authentication" do
       describe "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
-          login(user)
+          login_user(user)
         end
 
         describe "after signing in" do
@@ -63,10 +59,6 @@ describe "Authentication" do
           end
         end
       end
-    end
-
-    describe "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
 
       describe "in the Users controller" do
 
@@ -91,7 +83,7 @@ describe "Authentication" do
     describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
-      before { login(user) }
+      before { login_user(user) }
 
       describe "visiting Users#edit page" do
         before { visit edit_user_path(wrong_user) }
@@ -108,11 +100,43 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
       let(:non_admin) { FactoryGirl.create(:user) }
 
-      before { login non_admin }
+      before { login_user non_admin }
 
       describe "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
         specify { response.should redirect_to(login_path) }
+      end
+    end
+
+    describe "as admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      before { login_user admin }
+
+      describe "in admin mode (editing content)" do
+        before { visit admin_news_path }
+
+        it {
+          should have_selector(
+            'a',
+            content: t(:normal_view),
+            href: admin_switch_to_normal_view_path,
+            admin_view_path: news_path)
+        }
+      end
+
+      describe "not in admin mode (viewing content)" do
+        before {
+          set_is_in_admin_mode(false)
+          visit admin_news_path
+        }
+
+        it {
+          should have_selector(
+            'a',
+            content: t(:admin_view),
+            href: admin_switch_to_admin_view_path,
+            admin_view_path: admin_news_path)
+        }
       end
     end
 

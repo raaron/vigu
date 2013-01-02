@@ -15,6 +15,8 @@ Vigu::Application.routes.draw do
       match '/',               to: 'home#edit'
       match 'new_paragraph', to: 'home#new_paragraph'
       match 'update',        to: 'home#update'
+      match 'switch_to_admin_view',        to: 'application#switch_to_admin_view'
+      match 'switch_to_normal_view',        to: 'application#switch_to_normal_view'
     end
 
 

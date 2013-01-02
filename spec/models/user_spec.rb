@@ -30,6 +30,13 @@ describe User do
   subject { @user }
 
   it { should respond_to(:fname) }
+  it { should respond_to(:lname) }
+  it { should respond_to(:street) }
+  it { should respond_to(:plz) }
+  it { should respond_to(:place) }
+  it { should respond_to(:country) }
+  it { should respond_to(:bought_book) }
+  it { should respond_to(:newsletter) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }

@@ -14,11 +14,21 @@ class Paragraph < ActiveRecord::Base
 
   belongs_to :page
   has_many :images, :dependent => :destroy
-  attr_accessible :title, :body, :default_title, :default_body, :section, :page, :images_attributes, :images
+  attr_accessible :title, :body, :default_title, :default_body, :section, :page, :images_attributes, :images, :date
   attr_accessor :title, :body, :default_title, :default_body
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['photo'].blank? }
   after_destroy :remove_translation
   validates :section,  presence: true
+  validates :page,  presence: true
+
+  after_initialize :init
+  after_create :insert_empty_translation
+  after_save :update_translation
+  after_destroy :remove_translation
+
+  def init
+    self.date ||= Date.today
+  end
 
   def get_title
     is_default_locale ? '' : t(get_title_tag)
@@ -44,10 +54,6 @@ class Paragraph < ActiveRecord::Base
     get_tag('body')
   end
 
-  def get_edit_path
-    edit_paragraph_path(self)
-  end
-
   def update_translation
     update_translations(I18n.default_locale, {get_title_tag => default_title})
     update_translations(I18n.default_locale, {get_body_tag => default_body})
@@ -69,27 +75,17 @@ class Paragraph < ActiveRecord::Base
 
   def to_s
     "Paragraph:\n\t\t\t" +
-    ["ID: #{id}", "Title: #{I18n.translate(get_title_tag)}", "Body: #{I18n.translate(get_body_tag)}"].join("\n\t\t\t") + "\n\t\t\t" +
+    ["ID: #{id}", "Title: #{I18n.translate(get_title_tag)}", "Date: #{date.to_s}", "Body: #{I18n.translate(get_body_tag)}"].join("\n\t\t\t") + "\n\t\t\t" +
     images.map{|i| i.to_s}.join("\n\t\t\t\t")
+  end
+
+  def update_caption_translation(pics_attributes)
+    images.each do |image|
+      image.update_translations_from_params(pics_attributes)
+    end
   end
 
   def get_tag(part)
     [page.name, section, id, part].join('_')
-  end
-
-  def update_caption_translation(pics_attributes)
-    pics_attributes.values.each do |i|
-      if i.has_key?(:id)
-        image = Image.find_by_id(i[:id])
-        if image
-          image.update_translation(i[:default_caption], i[:caption])
-        end
-      elsif i.has_key?(:photo)
-        image = Image.find_by_photo_file_name(i[:photo].original_filename)
-        if image
-          image.update_translation(i[:default_caption], i[:caption])
-        end
-      end
-    end
   end
 end

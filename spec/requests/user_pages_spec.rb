@@ -1,18 +1,15 @@
 require 'spec_helper'
 
 describe "User pages" do
-  let(:home_page)  { FactoryGirl.create(:page, name: 'home') }
+  let(:home_page)  { Page.find_by_name("home") }
 
-  before {
-    app.default_url_options = { :locale => :de }
-    home_page.save
-  }
+  before { app.default_url_options = { :locale => :de } }
 
   subject { page }
 
   describe "index" do
     before do
-      login FactoryGirl.create(:user)
+      login_user FactoryGirl.create(:user)
       FactoryGirl.create(:user, fname: "Bob", email: "bob@example.com")
       FactoryGirl.create(:user, fname: "Ben", email: "ben@example.com")
       visit users_path
@@ -34,7 +31,7 @@ describe "User pages" do
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
         before do
-          login admin
+          login_user admin
           visit users_path
         end
 
@@ -94,7 +91,7 @@ describe "User pages" do
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
     before {
-      login(user)
+      login_user(user)
       visit edit_user_path(user)
     }
 

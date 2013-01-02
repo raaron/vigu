@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926172002) do
+ActiveRecord::Schema.define(:version => 20121224124105) do
 
   create_table "images", :force => true do |t|
     t.integer  "paragraph_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "position",           :default => 0
   end
 
   add_index "images", ["paragraph_id"], :name => "index_images_on_paragraph_id"
@@ -34,8 +35,10 @@ ActiveRecord::Schema.define(:version => 20120926172002) do
   create_table "paragraphs", :force => true do |t|
     t.string   "section"
     t.integer  "page_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "position",   :default => 0
+    t.date     "date"
   end
 
   add_index "paragraphs", ["page_id"], :name => "index_paragraphs_on_page_id"

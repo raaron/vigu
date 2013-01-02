@@ -10,8 +10,12 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-  def logged_in?
+  def is_logged_in?
     !current_user.nil?
+  end
+
+  def is_admin?
+    current_user != nil and current_user.admin?
   end
 
   def current_user=(user)

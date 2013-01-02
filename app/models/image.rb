@@ -16,8 +16,8 @@ class Image < ActiveRecord::Base
   include ApplicationHelper
 
   belongs_to :paragraph
-  has_attached_file :photo, :styles => { :original => '250*250>', :small => "50*50" }
-  attr_accessible :caption, :default_caption, :photo
+  has_attached_file :photo, :styles => { :original => '4250*4250>', :small => "50*50" }
+  attr_accessible :caption, :default_caption, :photo, :paragraph
   attr_accessor :caption, :default_caption
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 5.megabytes
@@ -41,12 +41,22 @@ class Image < ActiveRecord::Base
     remove_translations_for_tag(get_caption_tag)
   end
 
-  def update_translation(default_caption, caption)
-    default_caption = default_caption
-    caption = caption
-    update_translations(I18n.default_locale, {get_caption_tag => default_caption})
+  def update_translation(default_cap, cap)
+    update_translations(I18n.default_locale, {get_caption_tag => default_cap})
     if !is_default_locale
-      update_translations(I18n.locale, {get_caption_tag => caption})
+      update_translations(I18n.locale, {get_caption_tag => cap})
+    end
+  end
+
+  def update_translations_from_params(images_attributes)
+    images_attributes.values.each do |i|
+      if i.has_key?(:id) && id == i[:id].to_i
+        update_translation(i[:default_caption], i[:caption])
+        break
+      elsif i.has_key?(:photo) && photo.original_filename == i[:photo].original_filename
+        update_translation(i[:default_caption], i[:caption])
+        break
+      end
     end
   end
 

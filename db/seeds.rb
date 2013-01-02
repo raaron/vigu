@@ -15,7 +15,7 @@ news_page = Page.create(name: "news")
 [home_page, news_page].each do |page|
 
   3.times do |nr|
-    p = Paragraph.create(page: page, section: "main")
+    p = Paragraph.create(page: page, section: "main", date: Date.today)
 
     [:de, :en, :es].each do |locale|
       I18n.backend.store_translations(locale, {p.get_title_tag => "#{page.name.capitalize} #{nr}"})

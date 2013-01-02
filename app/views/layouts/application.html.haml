@@ -6,7 +6,10 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    = render_partial(:navigation)
+    - if is_in_admin_mode?
+      = render_partial(:admin_navigation)
+    - else
+      = render_partial(:normal_navigation)
     = yield
     = render_partial(:footer)
     = render_partial(:header)

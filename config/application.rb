@@ -60,5 +60,10 @@ module Vigu
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Application wide state to store the current mode for logged in admin users.
+    # If this is set to true, the user sees the admin view, otherwise, he sees
+    # the normal view.
+    config.is_in_admin_mode = false
   end
 end

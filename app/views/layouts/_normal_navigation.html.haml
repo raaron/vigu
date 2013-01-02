@@ -1,0 +1,29 @@
+%nav
+  NORMAL
+  = link_to(t(:home), root_path)
+  = link_to(t(:translations), translations_path)
+  = link_to(t(:news), news_path)
+  = link_to("Roadmap", development_roadmap_path)
+  = link_to("TODO's", development_todo_path)
+  = link_to("Done", development_done_path)
+
+  - if is_logged_in?
+    = link_to("Profile", edit_user_path(current_user))
+    = link_to("Logout", logout_path, method: "delete")
+
+    - if is_admin?
+      = link_to("Users", users_path)
+      = link_to(t(:admin), admin_path)
+
+  - else
+    = link_to(t(:register).capitalize, register_path)
+    = link_to("Login", login_path)
+
+  %br
+
+  - admin_view_link = yield(:admin_view_link)
+  - if is_admin?
+    - if not admin_view_link.empty?
+      = link_to(t(:admin_view), admin_switch_to_admin_view_path(:admin_view_path => admin_view_link))
+    - else
+      = link_to(t(:admin_view), admin_switch_to_admin_view_path(:admin_view_path => request.fullpath))
