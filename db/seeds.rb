@@ -11,8 +11,9 @@ include ApplicationHelper
 
 home_page = Page.create(name: "home")
 news_page = Page.create(name: "news")
+partners_page = Page.create(name: "partners")
 
-[home_page, news_page].each do |page|
+[home_page, news_page, partners_page].each do |page|
 
   3.times do |nr|
     p = Paragraph.create(page: page, section: "main", date: Date.today)

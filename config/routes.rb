@@ -8,9 +8,21 @@ Vigu::Application.routes.draw do
     resources :translations
 
     namespace :admin do
-      match 'news',               to: 'news#edit'
-      match 'news/new_paragraph', to: 'news#new_paragraph'
-      match 'news/update',        to: 'news#update'
+      resources :news do
+        collection do
+          post :sort
+        end
+      end
+
+      resources :partners do
+        collection do
+          post :sort
+        end
+      end
+      # match 'news',               to: 'news#index'
+      # match 'news/edit',          to: 'news#edit'
+      # match 'news/new_paragraph', to: 'news#new_paragraph'
+      # match 'news/update',        to: 'news#update'
 
       match '/',               to: 'home#edit'
       match 'new_paragraph', to: 'home#new_paragraph'
@@ -23,6 +35,7 @@ Vigu::Application.routes.draw do
     root to: "home#index"
 
     match 'news',               to: 'news#index'
+    match 'partners',               to: 'partners#index'
 
     match '/register',          to: 'users#new'
     match '/login',             to: 'sessions#new'

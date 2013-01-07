@@ -1,3 +1,3 @@
-= form_for @paragraph, :url => paragraphs_path, :html => { :multipart => true } do |f|
+= form_for @paragraph, :url => edit_, :html => { :multipart => true } do |f|
   = render_partial(:paragraph_form, {:form => f})
   = f.submit t(:save)

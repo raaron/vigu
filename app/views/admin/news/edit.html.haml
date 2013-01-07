@@ -2,4 +2,6 @@
 - provide(:normal_view_link, news_path)
 
 %h1= "News:"
-= paragraphs_form(admin_news_new_paragraph_path, admin_news_update_path)
+= form_for @paragraph, :url => admin_news_path(@paragraph), :html => { :multipart => true } do |f|
+  = paragraph_form(f)
+  = f.submit(t(:save))

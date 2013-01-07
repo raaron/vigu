@@ -1,0 +1,6 @@
+- provide(:title, t(:partners).capitalize)
+- provide(:admin_view_link, admin_partners_path)
+
+- @page.paragraphs.order(:position).each do |paragraph|
+  - @paragraph = paragraph
+  = render_partial('paragraph')

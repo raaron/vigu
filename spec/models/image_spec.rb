@@ -88,6 +88,8 @@ describe Image do
   it { should respond_to(:update_translation) }
   it { should respond_to(:get_caption_tag) }
   it { should respond_to(:update_translations_from_params) }
+  it { should respond_to(:width) }
+  it { should respond_to(:height)}
 
   it { should be_valid }
 
@@ -124,5 +126,14 @@ describe Image do
   describe "when removing an image" do
     before { @image.save }
     it { should_change_translations_by(-3) { @image.destroy } }
+  end
+
+  describe "size and height stored" do
+    before { @image.save }
+    it {
+      @image.width.should > 0
+      @image.height.should > 0
+      @image.get_small_width.should > 0
+    }
   end
 end

@@ -1,10 +1,5 @@
-%h1= @paragraph.get_title
-= l(@paragraph.date)
-%br
-= @paragraph.get_body
-%br
-- @paragraph.images.each do |image|
-  = image_tag(image.photo.url(:original))
+.paragraph
+  %h1= @paragraph.get_title
+  = l(@paragraph.date)
   %br
-  = t(image.get_caption_tag)
-  %br
+  - place_pictures_randomly(@paragraph.get_body, @paragraph.images)

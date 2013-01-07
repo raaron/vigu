@@ -1,0 +1,15 @@
+- provide(:title, t(:partners).capitalize)
+- provide(:normal_view_link, partners_path)
+
+%ul{:id => "paragraphs", "data-update-url" => sort_admin_partners_url}
+  - @page.paragraphs.order(:position).each do |paragraph|
+    - @paragraph = paragraph
+    = content_tag_for :li, @paragraph do
+      .paragraph_overview
+        = link_to(edit_admin_partner_path(@paragraph)) do
+          = render_partial(:paragraph_overview)
+          %br
+          = link_to image_tag("trash.png", :width => 50), @paragraph, :method => :delete
+
+%br
+= link_to("#{t(:paragraph)} #{t(:add)}", new_admin_partner_path)

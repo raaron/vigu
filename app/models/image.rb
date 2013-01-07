@@ -15,15 +15,37 @@
 class Image < ActiveRecord::Base
   include ApplicationHelper
 
+  ORIGINAL_WIDTH = 500
+  SMALL_WIDTH = 50
+
   belongs_to :paragraph
-  has_attached_file :photo, :styles => { :original => '4250*4250>', :small => "50*50" }
-  attr_accessible :caption, :default_caption, :photo, :paragraph
+  has_attached_file :photo, :styles => { :original => '#{ORIGINAL_WIDTH}*#{ORIGINAL_WIDTH}>', :small => "#{SMALL_WIDTH}*#{SMALL_WIDTH}" }
+  attr_accessible :caption, :default_caption, :photo, :paragraph, :width, :height
   attr_accessor :caption, :default_caption
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 5.megabytes
 
+  before_save :set_dimensions
   after_create :insert_empty_translation
   after_destroy :remove_translation
+
+  def set_dimensions
+    tempfile = self.photo.queued_for_write[:original]
+
+    unless tempfile.nil?
+      dimensions = Paperclip::Geometry.from_file(tempfile)
+      self.width = dimensions.width
+      self.height = dimensions.height
+    end
+  end
+
+  def get_small_width
+    if width > SMALL_WIDTH
+      return SMALL_WIDTH
+    else
+      return width
+    end
+  end
 
   def get_caption
     is_default_locale ? '' : t(get_caption_tag)

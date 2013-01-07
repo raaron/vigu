@@ -28,14 +28,14 @@ describe "Authentication" do
 
       it { should have_selector('title', text: user.fname) }
 
-      it { should have_link('Profile', href: edit_user_path(user)) }
-      it { should have_link('Logout', href: logout_path) }
+      it { should have_link(t(:profile), href: edit_user_path(user)) }
+      it { should have_link(t(:logout), href: logout_path) }
       it { should_not have_link('Login', href: login_path) }
 
 
       describe "followed by logout" do
-        before { click_link "Logout" }
-        it { should have_link('Login') }
+        before { click_link t(:logout) }
+        it { should have_link(t(:login)) }
       end
     end
 
@@ -113,29 +113,27 @@ describe "Authentication" do
       before { login_user admin }
 
       describe "in admin mode (editing content)" do
-        before { visit admin_news_path }
+        before { visit admin_news_index_path }
 
         it {
           should have_selector(
             'a',
             content: t(:normal_view),
-            href: admin_switch_to_normal_view_path,
-            admin_view_path: news_path)
+            href: admin_switch_to_normal_view_path)
         }
       end
 
       describe "not in admin mode (viewing content)" do
         before {
           set_is_in_admin_mode(false)
-          visit admin_news_path
+          visit admin_news_index_path
         }
 
         it {
           should have_selector(
             'a',
             content: t(:admin_view),
-            href: admin_switch_to_admin_view_path,
-            admin_view_path: admin_news_path)
+            href: admin_switch_to_admin_view_path)
         }
       end
     end

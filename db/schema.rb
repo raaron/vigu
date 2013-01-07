@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224124105) do
+ActiveRecord::Schema.define(:version => 20130103192324) do
 
   create_table "images", :force => true do |t|
     t.integer  "paragraph_id"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20121224124105) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "position",           :default => 0
+    t.integer  "width"
+    t.integer  "height"
   end
 
   add_index "images", ["paragraph_id"], :name => "index_images_on_paragraph_id"

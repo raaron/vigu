@@ -9,6 +9,9 @@ class ParagraphsController < ApplicationController
 
   def new
     @paragraph = Paragraph.new(page: Page.first, section: "main", default_title: "", default_body: "", title: "", body: "", date: Date.today)
+    @paragraph.save
+    @paragraph.insert_empty_translation
+    redirect_to edit_paragraph_path(@paragraph)
   end
 
   def edit

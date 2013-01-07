@@ -1,0 +1,7 @@
+- provide(:title, admin_title(t(:partners)))
+- provide(:normal_view_link, partners_path)
+
+%h1= "Partners:"
+= form_for @paragraph, :url => admin_partner_path(@paragraph), :html => { :multipart => true } do |f|
+  = paragraph_form(f)
+  = f.submit(t(:save))

@@ -1,0 +1,14 @@
+.paragraph
+  %h1= @paragraph.get_title
+  = l(@paragraph.date)
+  %br
+
+  - short_body = split_after_sentence(@paragraph.get_body, 0).first + "..."
+  - if @paragraph.images.empty?
+    - show_text_with_links(short_body)
+  - else
+    .overview_image
+      = image_tag(@paragraph.images[0].photo.url(:small))
+    .overview_body
+      - show_text_with_links(short_body, haml_output=true, show_links_as_text=true)
+

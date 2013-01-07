@@ -6,6 +6,7 @@ de:
   save: "Speichern"
   paragraph: "Abschnitt"
   add: "hinzufügen"
+  insert: "einfügen"
   remove: "löschen"
   caption: "Bildbeschreibung"
   home: "Home"
@@ -13,6 +14,11 @@ de:
   admin: "Administration"
   edit: "bearbeiten"
   news: "News"
+  partners: "Partner"
+  users: "Benutzer"
+  profile: "Profil"
+  login: "Anmelden"
+  logout: "Abmelden"
   register: "registrieren"
   fname: "Vorname"
   lname: "Nachname"
@@ -26,6 +32,9 @@ de:
   password_confirmation: "Passwort Bestätigung"
   normal_view: "Normale Ansicht"
   admin_view: "Admin Ansicht"
+  link: "Link"
+  visible_text: "angezeigter Text"
+  invisible_url: "www.unsichtbare_url.com"
 
   date:
     abbr_day_names:

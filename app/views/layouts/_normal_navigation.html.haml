@@ -3,21 +3,22 @@
   = link_to(t(:home), root_path)
   = link_to(t(:translations), translations_path)
   = link_to(t(:news), news_path)
+  = link_to(t(:partners), partners_path)
   = link_to("Roadmap", development_roadmap_path)
   = link_to("TODO's", development_todo_path)
   = link_to("Done", development_done_path)
 
   - if is_logged_in?
-    = link_to("Profile", edit_user_path(current_user))
-    = link_to("Logout", logout_path, method: "delete")
+    = link_to(t(:profile), edit_user_path(current_user))
+    = link_to(t(:logout).capitalize, logout_path, method: "delete")
 
     - if is_admin?
-      = link_to("Users", users_path)
+      = link_to(t(:users), users_path)
       = link_to(t(:admin), admin_path)
 
   - else
     = link_to(t(:register).capitalize, register_path)
-    = link_to("Login", login_path)
+    = link_to(t(:login).capitalize, login_path)
 
   %br
 

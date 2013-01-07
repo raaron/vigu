@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Paragraph - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/paragraph.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActiveRecord::Base
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="ApplicationHelper.html">ApplicationHelper</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-get_body">#get_body</a>
+    
+    <li><a href="#method-i-get_body_tag">#get_body_tag</a>
+    
+    <li><a href="#method-i-get_default_body">#get_default_body</a>
+    
+    <li><a href="#method-i-get_default_title">#get_default_title</a>
+    
+    <li><a href="#method-i-get_tag">#get_tag</a>
+    
+    <li><a href="#method-i-get_title">#get_title</a>
+    
+    <li><a href="#method-i-get_title_tag">#get_title_tag</a>
+    
+    <li><a href="#method-i-init">#init</a>
+    
+    <li><a href="#method-i-insert_empty_translation">#insert_empty_translation</a>
+    
+    <li><a href="#method-i-remove_translation">#remove_translation</a>
+    
+    <li><a href="#method-i-to_s">#to_s</a>
+    
+    <li><a href="#method-i-update_caption_translation">#update_caption_translation</a>
+    
+    <li><a href="#method-i-update_translation">#update_translation</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./Guardfile.html">Guardfile</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./developer/done_txt.html">done</a>
+  
+    <li class="file"><a href="./developer/roadmap_txt.html">roadmap</a>
+  
+    <li class="file"><a href="./developer/todo_txt.html">todo</a>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+    <li class="file"><a href="./h_txt.html">h</a>
+  
+    <li class="file"><a href="./public/robots_txt.html">robots</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Admin.html">Admin</a>
+  
+    <li><a href="./Admin/ApplicationController.html">Admin::ApplicationController</a>
+  
+    <li><a href="./Admin/HomeController.html">Admin::HomeController</a>
+  
+    <li><a href="./Admin/NewsController.html">Admin::NewsController</a>
+  
+    <li><a href="./Admin/PageController.html">Admin::PageController</a>
+  
+    <li><a href="./Vigu.html">Vigu</a>
+  
+    <li><a href="./Vigu/Application.html">Vigu::Application</a>
+  
+    <li><a href="./AddAttachmentPhotoToImages.html">AddAttachmentPhotoToImages</a>
+  
+    <li><a href="./AddCaptionToImages.html">AddCaptionToImages</a>
+  
+    <li><a href="./AddDateToParagraphs.html">AddDateToParagraphs</a>
+  
+    <li><a href="./AddDefaultToParagraphDate.html">AddDefaultToParagraphDate</a>
+  
+    <li><a href="./AddDimensionToImage.html">AddDimensionToImage</a>
+  
+    <li><a href="./AddIndexToUsersEmail.html">AddIndexToUsersEmail</a>
+  
+    <li><a href="./AddPositionToImages.html">AddPositionToImages</a>
+  
+    <li><a href="./AddPositionToParagraphs.html">AddPositionToParagraphs</a>
+  
+    <li><a href="./AddRememberTokenToUsers.html">AddRememberTokenToUsers</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./CreateImages.html">CreateImages</a>
+  
+    <li><a href="./CreatePages.html">CreatePages</a>
+  
+    <li><a href="./CreateParagraphs.html">CreateParagraphs</a>
+  
+    <li><a href="./CreateUsers.html">CreateUsers</a>
+  
+    <li><a href="./DevelopmentController.html">DevelopmentController</a>
+  
+    <li><a href="./DevelopmentHelper.html">DevelopmentHelper</a>
+  
+    <li><a href="./HomeController.html">HomeController</a>
+  
+    <li><a href="./HomeHelper.html">HomeHelper</a>
+  
+    <li><a href="./Image.html">Image</a>
+  
+    <li><a href="./NewsController.html">NewsController</a>
+  
+    <li><a href="./NewsHelper.html">NewsHelper</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Page.html">Page</a>
+  
+    <li><a href="./Paragraph.html">Paragraph</a>
+  
+    <li><a href="./ParagraphDateTimeToDate.html">ParagraphDateTimeToDate</a>
+  
+    <li><a href="./ParagraphDateToDateTime.html">ParagraphDateToDateTime</a>
+  
+    <li><a href="./ParagraphHelper.html">ParagraphHelper</a>
+  
+    <li><a href="./ParagraphSpecHelper.html">ParagraphSpecHelper</a>
+  
+    <li><a href="./ParagraphsController.html">ParagraphsController</a>
+  
+    <li><a href="./RemoveCaptionFromImage.html">RemoveCaptionFromImage</a>
+  
+    <li><a href="./RemoveDefaultFromParagraphDate.html">RemoveDefaultFromParagraphDate</a>
+  
+    <li><a href="./RemoveDefaultFromParagraphDate2.html">RemoveDefaultFromParagraphDate2</a>
+  
+    <li><a href="./RemoveFieldCaptionFromImage.html">RemoveFieldCaptionFromImage</a>
+  
+    <li><a href="./RenameParagraphDate.html">RenameParagraphDate</a>
+  
+    <li><a href="./RenameParagraphDate2.html">RenameParagraphDate2</a>
+  
+    <li><a href="./RenameParagraphDate3.html">RenameParagraphDate3</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./SessionsHelper.html">SessionsHelper</a>
+  
+    <li><a href="./SetAdminDefaultFalse.html">SetAdminDefaultFalse</a>
+  
+    <li><a href="./SetDefaultNewsletterTrueBoughtbookFalse.html">SetDefaultNewsletterTrueBoughtbookFalse</a>
+  
+    <li><a href="./Translation.html">Translation</a>
+  
+    <li><a href="./TranslationTable.html">TranslationTable</a>
+  
+    <li><a href="./TranslationsController.html">TranslationsController</a>
+  
+    <li><a href="./TranslationsHelper.html">TranslationsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Paragraph</h1>
+
+  <div id="description" class="description">
+    
+<h2 id="label-Schema+Information">Schema Information</h2>
+
+<p>Table name: paragraphs</p>
+
+<pre>id         :integer          not null, primary key
+section    :string(255)
+page_id    :integer
+created_at :datetime         not null
+updated_at :datetime         not null</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-body" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">body</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-default_body" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">default_body</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-default_title" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">default_title</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-title" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">title</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-get_body" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_body</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_body-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_body</span>
+  <span class="ruby-identifier">is_default_locale</span> <span class="ruby-operator">?</span> <span class="ruby-string">''</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-identifier">get_body_tag</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_body-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_body-method -->
+
+    
+      <div id="method-i-get_body_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_body_tag</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_body_tag-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_body_tag</span>
+  <span class="ruby-identifier">get_tag</span>(<span class="ruby-string">'body'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_body_tag-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_body_tag-method -->
+
+    
+      <div id="method-i-get_default_body" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_default_body</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_default_body-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_default_body</span>
+  <span class="ruby-identifier">t_for_locale</span>(<span class="ruby-constant">I18n</span>.<span class="ruby-identifier">default_locale</span>, <span class="ruby-identifier">get_body_tag</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_default_body-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_default_body-method -->
+
+    
+      <div id="method-i-get_default_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_default_title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_default_title-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_default_title</span>
+  <span class="ruby-identifier">t_for_locale</span>(<span class="ruby-constant">I18n</span>.<span class="ruby-identifier">default_locale</span>, <span class="ruby-identifier">get_title_tag</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_default_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_default_title-method -->
+
+    
+      <div id="method-i-get_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_tag</span><span
+            class="method-args">(part)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_tag-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tag</span>(<span class="ruby-identifier">part</span>)
+  [<span class="ruby-identifier">page</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">section</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">part</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">'_'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_tag-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_tag-method -->
+
+    
+      <div id="method-i-get_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_title-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_title</span>
+  <span class="ruby-identifier">is_default_locale</span> <span class="ruby-operator">?</span> <span class="ruby-string">''</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-identifier">get_title_tag</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_title-method -->
+
+    
+      <div id="method-i-get_title_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_title_tag</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_title_tag-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_title_tag</span>
+  <span class="ruby-identifier">get_tag</span>(<span class="ruby-string">'title'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_title_tag-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_title_tag-method -->
+
+    
+      <div id="method-i-init" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="init-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">date</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- init-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- init-method -->
+
+    
+      <div id="method-i-insert_empty_translation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">insert_empty_translation</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="insert_empty_translation-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_empty_translation</span>
+  <span class="ruby-identifier">insert_empty_translations_for_tag</span>(<span class="ruby-identifier">get_title_tag</span>)
+  <span class="ruby-identifier">insert_empty_translations_for_tag</span>(<span class="ruby-identifier">get_body_tag</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- insert_empty_translation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- insert_empty_translation-method -->
+
+    
+      <div id="method-i-remove_translation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_translation</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="remove_translation-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_translation</span>
+  <span class="ruby-identifier">remove_translations_for_tag</span>(<span class="ruby-identifier">get_title_tag</span>)
+  <span class="ruby-identifier">remove_translations_for_tag</span>(<span class="ruby-identifier">get_body_tag</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- remove_translation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- remove_translation-method -->
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-string">&quot;Paragraph:\n\t\t\t&quot;</span> <span class="ruby-operator">+</span>
+  [<span class="ruby-node">&quot;ID: #{id}&quot;</span>, <span class="ruby-node">&quot;Title: #{I18n.translate(get_title_tag)}&quot;</span>, <span class="ruby-node">&quot;Date: #{date.to_s}&quot;</span>, <span class="ruby-node">&quot;Body: #{I18n.translate(get_body_tag)}&quot;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\t\t\t&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n\t\t\t&quot;</span> <span class="ruby-operator">+</span>
+  <span class="ruby-identifier">images</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\t\t\t\t&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_s-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_s-method -->
+
+    
+      <div id="method-i-update_caption_translation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_caption_translation</span><span
+            class="method-args">(pics_attributes)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_caption_translation-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_caption_translation</span>(<span class="ruby-identifier">pics_attributes</span>)
+  <span class="ruby-identifier">images</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">image</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">image</span>.<span class="ruby-identifier">update_translations_from_params</span>(<span class="ruby-identifier">pics_attributes</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_caption_translation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_caption_translation-method -->
+
+    
+      <div id="method-i-update_translation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_translation</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_translation-source">
+            <pre><span class="ruby-comment"># File app/models/paragraph.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_translation</span>
+  <span class="ruby-identifier">update_translations</span>(<span class="ruby-constant">I18n</span>.<span class="ruby-identifier">default_locale</span>, {<span class="ruby-identifier">get_title_tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_title</span>})
+  <span class="ruby-identifier">update_translations</span>(<span class="ruby-constant">I18n</span>.<span class="ruby-identifier">default_locale</span>, {<span class="ruby-identifier">get_body_tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_body</span>})
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">is_default_locale</span>
+    <span class="ruby-identifier">update_translations</span>(<span class="ruby-constant">I18n</span>.<span class="ruby-identifier">locale</span>, {<span class="ruby-identifier">get_title_tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">title</span>})
+    <span class="ruby-identifier">update_translations</span>(<span class="ruby-constant">I18n</span>.<span class="ruby-identifier">locale</span>, {<span class="ruby-identifier">get_body_tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">body</span>})
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_translation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_translation-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

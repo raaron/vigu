@@ -2,13 +2,14 @@
   ADMIN
   = link_to(t(:home), root_path)
   = link_to(t(:translations), translations_path)
-  = link_to(t(:news), admin_news_path)
+  = link_to(t(:news), admin_news_index_path)
+  = link_to(t(:partners), admin_partners_path)
   = link_to("Roadmap", development_roadmap_path)
   = link_to("TODO's", development_todo_path)
   = link_to("Done", development_done_path)
-  = link_to("Profile", edit_user_path(current_user))
-  = link_to("Logout", logout_path, method: "delete")
-  = link_to("Users", users_path)
+  = link_to(t(:profile), edit_user_path(current_user))
+  = link_to(t(:logout).capitalize, logout_path, method: "delete")
+  = link_to(t(:users), users_path)
   = link_to(t(:admin), admin_path)
 
   %br
