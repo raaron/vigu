@@ -54,9 +54,10 @@ class Paragraph < ActiveRecord::Base
   end
 
   def update_translation
-    update_translations(I18n.default_locale, {get_title_tag => default_title})
-    update_translations(I18n.default_locale, {get_body_tag => default_body})
-    if !is_default_locale
+    if is_default_locale
+      update_translations(I18n.default_locale, {get_title_tag => default_title})
+      update_translations(I18n.default_locale, {get_body_tag => default_body})
+    else
       update_translations(I18n.locale, {get_title_tag => title})
       update_translations(I18n.locale, {get_body_tag => body})
     end

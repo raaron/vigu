@@ -64,8 +64,9 @@ class Image < ActiveRecord::Base
   end
 
   def update_translation(default_cap, cap)
-    update_translations(I18n.default_locale, {get_caption_tag => default_cap})
-    if !is_default_locale
+    if is_default_locale
+      update_translations(I18n.default_locale, {get_caption_tag => default_cap})
+    else
       update_translations(I18n.locale, {get_caption_tag => cap})
     end
   end
