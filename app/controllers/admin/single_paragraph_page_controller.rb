@@ -1,5 +1,15 @@
 class Admin::SingleParagraphPageController < Admin::PageController
 
+  def initialize
+    @main_collection = @page.paragraph_collections.find_by_section(:main)
+    super
+  end
+
+  def new
+    Paragraph.create(paragraph_collection: @main_collection,
+                     date: Date.today)
+  end
+
   def edit
     @paragraph = Paragraph.find_by_id(params[:id])
   end

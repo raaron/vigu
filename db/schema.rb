@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103192324) do
+ActiveRecord::Schema.define(:version => 20130108121820) do
 
   create_table "images", :force => true do |t|
     t.integer  "paragraph_id"
@@ -34,16 +34,22 @@ ActiveRecord::Schema.define(:version => 20130103192324) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "paragraphs", :force => true do |t|
-    t.string   "section"
+  create_table "paragraph_collections", :force => true do |t|
     t.integer  "page_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "position",   :default => 0
+    t.string   "section"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "paragraphs", :force => true do |t|
+    t.integer  "paragraph_collection_id"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "position",                :default => 0
     t.date     "date"
   end
 
-  add_index "paragraphs", ["page_id"], :name => "index_paragraphs_on_page_id"
+  add_index "paragraphs", ["paragraph_collection_id"], :name => "index_paragraphs_on_page_id"
 
   create_table "translations", :force => true do |t|
     t.string  "locale"

@@ -74,7 +74,7 @@ describe "User pages" do
         before { click_button "Registrieren" }
         let(:user) { User.find_by_email('user@example.com') }
         it { should have_selector('title', text: user.fname) }
-        it { should have_link(t(:logout)) }
+        it { should have_link(t(:logout).capitalize, href: logout_path) }
       end
 
     end
@@ -119,7 +119,7 @@ describe "User pages" do
       end
 
       it { should have_selector('title', text: new_fname) }
-      it { should have_link(t(:logout), href: logout_path) }
+      it { should have_link(t(:logout).capitalize, href: logout_path) }
       specify { user.reload.fname.should  == new_fname }
       specify { user.reload.email.should == new_email }
     end

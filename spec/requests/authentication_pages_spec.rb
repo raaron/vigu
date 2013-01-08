@@ -29,13 +29,13 @@ describe "Authentication" do
       it { should have_selector('title', text: user.fname) }
 
       it { should have_link(t(:profile), href: edit_user_path(user)) }
-      it { should have_link(t(:logout), href: logout_path) }
+      it { should have_link(t(:logout).capitalize, href: logout_path) }
       it { should_not have_link('Login', href: login_path) }
 
 
       describe "followed by logout" do
-        before { click_link t(:logout) }
-        it { should have_link(t(:login)) }
+        before { click_link t(:logout).capitalize }
+        it { should have_link(t(:login).capitalize) }
       end
     end
 

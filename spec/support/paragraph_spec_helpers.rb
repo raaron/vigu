@@ -103,7 +103,11 @@ module ParagraphSpecHelper
   end
 
   def get_test_paragraph(paragraphs_page, section)
-    paragraph = Paragraph.new(title: "new title", body: "new body", section: section, page: paragraphs_page, date: Date.new(2012, 7, 7))
+    paragraph_collection = paragraphs_page.paragraph_collections.find_by_section(section)
+    paragraph = Paragraph.new(title: "new title",
+                              body: "new body",
+                              paragraph_collection: paragraph_collection,
+                              date: Date.new(2012, 7, 7))
     image0 = Image.new(paragraph: paragraph, :photo => File.new(Rails.root.join('spec', 'fixtures', 'foo.png'), 'r'), :caption => "caption0")
     image1 = Image.new(paragraph: paragraph, :photo => File.new(Rails.root.join('spec', 'fixtures', 'bar.png'), 'r'), :caption => "caption1")
     paragraph.images = [image0, image1]
@@ -233,7 +237,7 @@ module ParagraphSpecHelper
 
   def check_delete_paragraph
     it {
-      path = paragraph_path(corresponding_page.paragraphs.first)
+      path = paragraph_path(corresponding_page.get_paragraphs(:main).first)
       expect { page.driver.submit(:delete, path, {}) }.to(
                                           change(Paragraph, :count).by(-1) &&
                                           change(Translation, :count).by(-6))

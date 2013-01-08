@@ -8,7 +8,7 @@ describe "News" do
   let(:section)  { "main" }
   let(:paragraph_html_tag)  { "paragraph" }
   let(:reference_paragraph)  { get_test_paragraph(corresponding_page, section) }
-  let(:edited_paragraph)  { corresponding_page.paragraphs.first }
+  let(:edited_paragraph)  { corresponding_page.get_paragraphs(:main).first }
 
   subject { page }
 

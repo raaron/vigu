@@ -5,7 +5,7 @@ include SessionsHelper
 
 describe "Home" do
   let(:home_page)  { Page.find_by_name("home") }
-  let(:paragraph)  { home_page.paragraphs.first }
+  let(:paragraph)  { home_page.get_paragraphs(:main).first }
   let(:caption0)  { "caption0" }
 
   def add_file(nr, filename)

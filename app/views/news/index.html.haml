@@ -1,6 +1,6 @@
 - provide(:title, t(:news).capitalize)
 - provide(:admin_view_link, admin_news_index_path)
 
-- @page.paragraphs.order(:position).each do |paragraph|
+- @page.get_paragraphs(:main).order(:position).each do |paragraph|
   - @paragraph = paragraph
   = render_partial('paragraph')

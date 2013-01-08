@@ -8,14 +8,14 @@ describe Paragraph do
   let(:section)  { "main" }
   let(:paragraph_html_tag)  { "paragraph" }
   let(:reference_paragraph)  { get_test_paragraph(corresponding_page, section) }
-  let(:edited_paragraph)  { corresponding_page.paragraphs.first }
+  let(:edited_paragraph)  { corresponding_page.get_paragraphs(:main).first }
 
   subject { page }
 
   before { app.default_url_options = { :locale => :de } }
 
   describe "Index page to show all paragraphs" do
-    let(:existing_paragraph)  { corresponding_page.paragraphs.first }
+    let(:existing_paragraph)  { corresponding_page.get_paragraphs(:main).first }
 
     before { visit paragraphs_path }
 

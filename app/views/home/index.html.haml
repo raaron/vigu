@@ -1,5 +1,5 @@
 - provide(:title, t(:home).capitalize)
 
-- @page.paragraphs.each do |paragraph|
+- @page.get_paragraphs(:main).each do |paragraph|
   - @paragraph = paragraph
   = render_partial('paragraph')

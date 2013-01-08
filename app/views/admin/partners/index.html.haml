@@ -2,7 +2,7 @@
 - provide(:normal_view_link, partners_path)
 
 %ul{:id => "paragraphs", "data-update-url" => sort_admin_partners_url}
-  - @page.paragraphs.order(:position).each do |paragraph|
+  - @page.get_paragraphs(:main).order(:position).each do |paragraph|
     - @paragraph = paragraph
     = content_tag_for :li, @paragraph do
       .paragraph_overview

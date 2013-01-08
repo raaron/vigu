@@ -8,7 +8,8 @@ class ParagraphsController < ApplicationController
   end
 
   def new
-    @paragraph = Paragraph.new(page: Page.first, section: "main", default_title: "", default_body: "", title: "", body: "", date: Date.today)
+    @paragraph = Paragraph.new(paragraph_collection: Page.first.paragraph_collections.find_by_section(:main),
+                               date: Date.today)
     @paragraph.save
     @paragraph.insert_empty_translation
     redirect_to edit_paragraph_path(@paragraph)

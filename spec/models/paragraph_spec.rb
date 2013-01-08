@@ -2,7 +2,7 @@ require 'spec_helper'
 include ApplicationHelper
 
 describe Paragraph do
-  let(:home_page)  { FactoryGirl.create(:page, name: 'home') }
+  let(:home_page)  { Page.find_by_name("home") }
 
   def should_change_translations_by(count)
     expect {yield}.to(change(Translation, :count).by(count))
@@ -27,8 +27,7 @@ describe Paragraph do
   end
 
   before do
-    @paragraph = Paragraph.new(page: home_page,
-                               section: "main",
+    @paragraph = Paragraph.new(paragraph_collection: home_page.paragraph_collections.find_by_section(:main),
                                default_title: "title spanish",
                                title: "title deutsch",
                                default_body: "body spanish",
@@ -42,8 +41,7 @@ describe Paragraph do
   it { should respond_to(:title) }
   it { should respond_to(:default_body) }
   it { should respond_to(:body) }
-  it { should respond_to(:section) }
-  it { should respond_to(:page) }
+  it { should respond_to(:paragraph_collection) }
   it { should respond_to(:images) }
   it { should respond_to(:date) }
   it { should respond_to(:get_title) }
@@ -57,13 +55,8 @@ describe Paragraph do
 
   it { should be_valid }
 
-  describe "when section is not present" do
-    before { @paragraph.section = " " }
-    it { should_not be_valid }
-  end
-
-  describe "when page is not present" do
-    before { @paragraph.page = nil }
+  describe "if it does not belong to a paragraph_collection" do
+    before { @paragraph.paragraph_collection = nil }
     it { should_not be_valid }
   end
 

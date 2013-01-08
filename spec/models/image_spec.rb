@@ -4,7 +4,7 @@ include ActionDispatch::TestProcess
 
 describe Image do
   let(:home_page)  { Page.find_by_name("home") }
-  let(:paragraph)  { home_page.paragraphs.first }
+  let(:paragraph)  { home_page.get_paragraphs(:main).first }
 
   let(:default_caption)  { "caption spanish" }
   let(:caption)  { "caption english" }

@@ -14,9 +14,10 @@ news_page = Page.create(name: "news")
 partners_page = Page.create(name: "partners")
 
 [home_page, news_page, partners_page].each do |page|
+  paragraph_collection = ParagraphCollection.create(page: page, section: "main")
 
   3.times do |nr|
-    p = Paragraph.create(page: page, section: "main", date: Date.today)
+    p = Paragraph.create(paragraph_collection: paragraph_collection, date: Date.today)
 
     [:de, :en, :es].each do |locale|
       I18n.backend.store_translations(locale, {p.get_title_tag => "#{page.name.capitalize} #{nr}"})

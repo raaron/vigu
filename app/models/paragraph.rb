@@ -12,14 +12,13 @@
 class Paragraph < ActiveRecord::Base
   include ApplicationHelper
 
-  belongs_to :page
+  belongs_to :paragraph_collection
   has_many :images, :dependent => :destroy
-  attr_accessible :title, :body, :default_title, :default_body, :section, :page, :images_attributes, :images, :date
+  attr_accessible :title, :body, :default_title, :default_body, :paragraph_collection, :images_attributes, :images, :date
   attr_accessor :title, :body, :default_title, :default_body
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['photo'].blank? }
   after_destroy :remove_translation
-  validates :section,  presence: true
-  validates :page,  presence: true
+  validates :paragraph_collection,  presence: true
 
   after_initialize :init
   after_create :insert_empty_translation
@@ -86,6 +85,6 @@ class Paragraph < ActiveRecord::Base
   end
 
   def get_tag(part)
-    [page.name, section, id, part].join('_')
+    [paragraph_collection.page.name, paragraph_collection.section, id, part].join('_')
   end
 end
