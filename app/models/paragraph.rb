@@ -30,7 +30,7 @@ class Paragraph < ActiveRecord::Base
   end
 
   def get_title
-    is_default_locale ? '' : t(get_title_tag)
+    t(get_title_tag)
   end
 
   def get_default_title
@@ -38,7 +38,7 @@ class Paragraph < ActiveRecord::Base
   end
 
   def get_body
-    is_default_locale ? '' : t(get_body_tag)
+    t(get_body_tag)
   end
 
   def get_default_body

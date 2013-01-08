@@ -13,7 +13,7 @@ describe "Partners" do
   subject { page }
 
   before do
-    app.default_url_options = { :locale => :de }
+    app.default_url_options = { :locale => :es }
     login_user(FactoryGirl.create(:admin))
   end
 

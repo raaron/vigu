@@ -1,4 +1,7 @@
 %p
   = form.label label_text
   %br/
-  = form.text_area symbol, :value => text
+  - if disabled
+    = form.text_area symbol, :value => text, :disabled => "disabled"
+  - else
+    = form.text_area symbol, :value => text

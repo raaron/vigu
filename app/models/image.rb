@@ -48,7 +48,7 @@ class Image < ActiveRecord::Base
   end
 
   def get_caption
-    is_default_locale ? '' : t(get_caption_tag)
+    t(get_caption_tag)
   end
 
   def get_default_caption

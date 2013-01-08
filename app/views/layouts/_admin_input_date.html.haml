@@ -1,6 +1,11 @@
-= render_partial(:admin_row,
-  {:left => form.date_select(:date,
+- if is_default_locale
+  - left = form.date_select(:date,
                     :default => Date.today,
                     :start_year => Date.today.year - 1,
-                    :end_year => Date.today.year + 1),
+                    :end_year => Date.today.year + 1)
+- else
+  - left = l(@paragraph.date)
+
+= render_partial(:admin_row,
+  {:left => left,
    :right => ''})

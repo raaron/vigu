@@ -1,4 +1,4 @@
 %h1= "Paragraphs:"
-= link_to("#{t(:paragraph)} #{t(:add)}", new_paragraph_path)
+= link_to(t_add(:paragraph), new_paragraph_path)
 - edit_path = method(:edit_paragraph_path)
 = render_partial(:editable_list, {:edit_path => edit_path})

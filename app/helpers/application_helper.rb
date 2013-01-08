@@ -71,17 +71,18 @@ module ApplicationHelper
     render :partial => 'layouts/' + name.to_s, :locals => locals
   end
 
-  def line_input(label_text, symbol, text='', form=nil)
+  def line_input(label_text, symbol, text='', form=nil, disabled=false)
     render_partial('line_input', {:label_text => label_text, :text => text,
-                                  :symbol => symbol, :form => form})
+                                  :symbol => symbol, :form => form,
+                                  :disabled => disabled})
   end
 
-  def line_input_title(symbol=:title, title='', form=nil)
-    line_input(t(:title), symbol, title, form)
+  def line_input_title(symbol=:title, title='', form=nil, disabled=false)
+    line_input(t(:title), symbol, title, form, disabled)
   end
 
-  def line_input_caption(symbol=:caption, caption='', form=nil)
-    line_input(t(:caption), symbol, caption, form)
+  def line_input_caption(symbol=:caption, caption='', form=nil, disabled=false)
+    line_input(t(:caption), symbol, caption, form, disabled)
   end
 
   def password_input(label_text, symbol, form=nil)
@@ -89,13 +90,14 @@ module ApplicationHelper
                                       :symbol => symbol, :form => form})
   end
 
-  def text_input(label_text, symbol, text='', form=nil)
+  def text_input(label_text, symbol, text='', form=nil, disabled=false)
     render_partial('text_input', {:label_text => label_text, :text => text,
-                                  :symbol => symbol, :form => form})
+                                  :symbol => symbol, :form => form,
+                                  :disabled => disabled})
   end
 
-  def text_input_body(symbol=:body, body='', form=nil)
-    text_input(t(:body), symbol, body, form)
+  def text_input_body(symbol=:body, body='', form=nil, disabled=false)
+    text_input(t(:body), symbol, body, form, disabled)
   end
 
   def paragraph_form(form=nil)

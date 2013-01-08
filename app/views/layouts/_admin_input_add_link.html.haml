@@ -1,3 +1,10 @@
+- if is_default_locale
+  - left = form.submit(t_insert(:link), {:name => "add_link_default"})
+  - right = ""
+- else
+  - left = ""
+  - right = form.submit(t_insert(:link), {:name => "add_link"})
+
 = render_partial(:admin_row,
-  {:left => form.submit(t_insert(:link), {:name => "add_link_default"}),
-   :right => form.submit(t_insert(:link), {:name => "add_link"})})
+  {:left => left,
+   :right => right})

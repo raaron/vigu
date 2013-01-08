@@ -1,11 +1,13 @@
-= render_partial(:admin_row,
-  {:left => form.label(t_add(:picture)),
-   :right => ''})
+- if is_default_locale
 
-= render_partial(:admin_row,
-  {:left => form.file_field(:photo),
-   :right => ''})
+  = render_partial(:admin_row,
+    {:left => form.label(t_add(:picture)),
+     :right => ''})
 
-= render_partial(:admin_row,
-  {:left => line_input_caption(symbol=:default_caption, caption='', form=form),
-   :right => line_input_caption(symbol=:caption, caption='', form=form)})
+  = render_partial(:admin_row,
+    {:left => form.file_field(:photo),
+     :right => ''})
+
+  = render_partial(:admin_row,
+    {:left => line_input_caption(symbol=:default_caption, caption='', form=form, disabled=(not is_default_locale)),
+     :right => line_input_caption(symbol=:caption, caption='', form=form, disabled=false)})

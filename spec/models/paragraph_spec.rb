@@ -17,16 +17,12 @@ describe Paragraph do
     should_change_translations_by(0) { @paragraph.update_attributes(title: new_title) }
     should_change_translations_by(0) { @paragraph.update_attributes(body: new_body) }
 
-    if is_default_locale
-      @paragraph.get_title.should == ""
-      @paragraph.get_body.should == ""
-    else
-      @paragraph.get_title.should == new_title
-      @paragraph.get_body.should == new_body
-    end
-  end
+    @paragraph.get_title.should == new_title
+    @paragraph.get_body.should == new_body
+end
 
   before do
+    I18n.locale = :en
     @paragraph = Paragraph.new(paragraph_collection: home_page.paragraph_collections.find_by_section(:main),
                                default_title: "title spanish",
                                title: "title deutsch",

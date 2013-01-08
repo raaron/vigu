@@ -1,7 +1,7 @@
 module ParagraphSpecHelper
 
   def change_title
-    fill_in paragraph_html_tag + "_title", with: reference_paragraph.title
+    fill_in paragraph_html_tag + "_default_title", with: reference_paragraph.title
   end
 
   def check_title
@@ -10,7 +10,7 @@ module ParagraphSpecHelper
   end
 
   def change_body
-    fill_in paragraph_html_tag + "_body", with: reference_paragraph.body
+    fill_in paragraph_html_tag + "_default_body", with: reference_paragraph.body
   end
 
   def check_body
@@ -93,7 +93,7 @@ module ParagraphSpecHelper
 
   def add_file_with_caption(tag, nr, filename, caption)
     add_file(tag, nr, filename)
-    fill_in tag + "_images_attributes_#{nr}_caption",  with: caption
+    fill_in tag + "_images_attributes_#{nr}_default_caption",  with: caption
   end
 
   def check_translation_change_on_button_click(button_name, par_change, trans_change)
@@ -179,7 +179,7 @@ module ParagraphSpecHelper
       before do
         add_picture_with_caption(0)
         check_click_save_changes_translation_count_by(3)
-        fill_in paragraph_html_tag + "_images_attributes_0_caption",  with: new_caption
+        fill_in paragraph_html_tag + "_images_attributes_0_default_caption",  with: new_caption
         check_click_save_changes_translation_count_by(0)
       end
 

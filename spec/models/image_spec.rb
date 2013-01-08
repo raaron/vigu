@@ -50,7 +50,7 @@ describe Image do
 
     @image.get_default_caption.should == default_caption
     if is_default_locale
-      @image.get_caption.should == ''
+      @image.get_caption.should == default_caption
     else
       @image.get_caption.should == caption
     end
