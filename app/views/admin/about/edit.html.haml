@@ -1,0 +1,38 @@
+- provide(:title, admin_title(t(:about_us)))
+- provide(:normal_view_link, about_path)
+
+- def get_admin_title_input(text, form)
+  - return admin_line_input(symbol="#{text}_title", translation_tag="about_#{text}_title", css_class="input_title", form=form)
+
+- def get_admin_input(text, form)
+  - return admin_line_input(symbol=text, translation_tag=text, css_class="input_normal", form=form)
+
+
+= form_for @page, :url => admin_about_update_path, :html => { :multipart => true, :name => "savable_form" } do |page_builder|
+
+  %table
+    = get_admin_title_input("page", page_builder)
+    = get_admin_title_input("people", page_builder)
+
+  = page_builder.fields_for :paragraph_collections, @people_collection do |collection_builder|
+    = collection_builder.fields_for :paragraphs do |paragraph_builder|
+      - @paragraph = paragraph_builder.object
+      = check_box_destroy(paragraph_builder)
+      = render_partial(:paragraph_form, {:form => paragraph_builder})
+
+  %table
+    = get_admin_title_input("work", page_builder)
+
+  = page_builder.fields_for :paragraph_collections, @work_collection do |collection_builder|
+    = collection_builder.fields_for :paragraphs do |paragraph_builder|
+      - @paragraph = paragraph_builder.object
+      = check_box_destroy(paragraph_builder)
+      = render_partial(:paragraph_form, {:form => paragraph_builder})
+
+  %table
+    = get_admin_title_input("contact", page_builder)
+  = page_builder.text_field(:contact_email_address, :value => t_for_default_locale(:contact_email_address), :class => "input_normal")
+
+  %br
+
+  = page_builder.submit t(:save), :name => "save_button"

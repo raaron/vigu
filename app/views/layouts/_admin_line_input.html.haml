@@ -1,0 +1,10 @@
+- if is_default_locale
+  - left = form.text_field(symbol, :value => t(translation_tag), :class => css_class)
+  - right = ""
+- else
+  - left = form.text_field("disabled_#{symbol.to_s}", :value => t_for_locale(I18n.default_locale, translation_tag), :disabled => "disabled", :class => css_class)
+  - right = form.text_field(symbol, :value => t(translation_tag), :class => css_class)
+
+= render_partial(:admin_row,
+  {:left => left,
+   :right => right})

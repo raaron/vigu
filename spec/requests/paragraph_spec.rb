@@ -12,7 +12,7 @@ describe Paragraph do
 
   subject { page }
 
-  before { app.default_url_options = { :locale => :es } }
+  before { set_default_locale_for_tests }
 
   describe "Index page to show all paragraphs" do
     let(:existing_paragraph)  { corresponding_page.get_paragraphs(:main).first }

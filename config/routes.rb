@@ -1,5 +1,6 @@
 Vigu::Application.routes.draw do
 
+
   scope "(:locale)", :locale => /de|en|es/ do
     resources :users
     resources :sessions, only: [:new, :create, :destroy]
@@ -19,6 +20,10 @@ Vigu::Application.routes.draw do
           post :sort
         end
       end
+
+      #match 'paragraph_collection/update',       to: 'paragraph_collection#update'
+      match 'about',              to: 'about#edit'
+      match 'about/update',       to: 'about#update'
       # match 'news',               to: 'news#index'
       # match 'news/edit',          to: 'news#edit'
       # match 'news/new_paragraph', to: 'news#new_paragraph'
@@ -36,6 +41,7 @@ Vigu::Application.routes.draw do
 
     match 'news',               to: 'news#index'
     match 'partners',               to: 'partners#index'
+    match 'about',               to: 'about#show'
 
     match '/register',          to: 'users#new'
     match '/login',             to: 'sessions#new'

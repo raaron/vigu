@@ -1,0 +1,17 @@
+- provide(:title, t(:about_us).capitalize)
+- provide(:admin_view_link, admin_about_path)
+
+%h1= t(:about_page_title)
+
+%h2= t(:about_people_title)
+- @page.get_paragraphs(:people).each do |person|
+  - @paragraph = person
+  = render_partial('paragraph')
+
+%h2= t(:about_work_title)
+- @page.get_paragraphs(:work).each do |project|
+  - @paragraph = project
+  = render_partial('paragraph')
+
+%h2= t(:about_contact_title)
+= mail_to t_for_default_locale(:contact_email_address)

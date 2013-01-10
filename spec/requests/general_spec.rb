@@ -6,7 +6,7 @@ require 'spec_helper'
 describe "General page template" do
 
   before {
-    app.default_url_options = { :locale => :de }
+    set_non_default_locale_for_tests
     visit root_path
   }
 
@@ -51,11 +51,13 @@ describe "General page template" do
 
       check_link(visible_as_admin, t(:news), admin_news_index_path)
       check_link(visible_as_admin, t(:partners), admin_partners_path)
+      check_link(visible_as_admin, t(:about_us), admin_about_path)
       check_link(visible_as_admin, t(:users), users_path)
       check_link(visible_as_admin, t(:admin), admin_path)
 
       check_link(invisible_as_admin, t(:news), news_path)
       check_link(invisible_as_admin, t(:partners), partners_path)
+      check_link(invisible_as_admin, t(:about_us), about_path)
     end
 
     def check_logged_in_links(is_logged_in, user=nil)
@@ -121,22 +123,24 @@ describe "General page template" do
     end
 
     it {
-      visit "/de"
+      set_locale_for_tests(:de)
+      visit root_path
       should have_content('Deutsch')
       check_english_link
       check_spanish_link
     }
 
     it {
-      visit "/es"
+      set_locale_for_tests(:es)
+      visit root_path
       should have_content('Espanol')
       check_english_link
       check_german_link
     }
 
     it {
-      visit "/en"
-      should have_content('English')
+      set_locale_for_tests(:en)
+      visit root_path
       check_german_link
       check_spanish_link
     }

@@ -2,7 +2,7 @@ class Admin::MultiParagraphPageController < Admin::PageController
 
   def update
 
-    page_params = params[:page]
+    page_params = params[@page.class.name.downcase]
 
     # Hack: Updating paragraphs fails for some strange reasons if their date
     # did not change. Updating paragraphs with date changes works as expected.
@@ -11,32 +11,44 @@ class Admin::MultiParagraphPageController < Admin::PageController
 
 
     # Define a date, that will never occure in the params, but will be used for the fake update.
-    impossible_date = Date.new(1999, 1, 1)
+    impossible_date = Date.new(1990, 1, 1)
 
     # Setup the fake params for the first fake update (Change the date fields of
     # all paragraphs to an impossible date).
     fake_params = page_params.deep_dup
-    par_attrs = fake_params[:paragraphs_attributes]
-    par_attrs.keys.each do |key|
-      par_attrs.delete(key)
-      par_attrs[key] = {:id => page_params[:paragraphs_attributes][key][:id],
-                        "date(1i)" => impossible_date.year.to_s,
-                        "date(2i)" => impossible_date.month.to_s,
-                        "date(3i)" => impossible_date.day.to_s
-                       }
+    collection_params = fake_params[:paragraph_collections_attributes]
+
+    collection_params.keys.each do |collection_key|
+      paragraph_params = collection_params[collection_key][:paragraphs_attributes]
+
+      paragraph_params.keys.each do |paragraph_key|
+        paragraph_id = paragraph_params[paragraph_key][:id]
+
+        paragraph_params.delete(paragraph_key)
+        fake_date_hash = get_date_hash(impossible_date)
+        fake_date_hash[:id] = paragraph_id
+        paragraph_params[paragraph_key] = fake_date_hash
+
+        # Additionally, add key/values for the original date to the
+        # page_params, if they are not already there anyways.
+        # This is necesarry in case of missing date values in the params hash.
+        original_date = Paragraph.find(paragraph_id).date
+        original_hash = get_date_hash(original_date)
+        page_params[:paragraph_collections_attributes][collection_key][:paragraphs_attributes][paragraph_key].update(original_hash)
+      end
     end
 
     # Perform the fake update.
     @page.update_attributes(fake_params)
 
-    # p = {"paragraphs_attributes"=>{"3"=>{"title"=>"new title", "date(3i)"=>"2", "date(2i)"=>"1", "date(1i)"=>"2013", "id"=>"7"}}}
-
     # Finally do the real update with the original params.
     if @page.update_attributes(page_params)
-      update_caption_translation(page_params[:paragraphs_attributes].values)
-      flash.notice = "Updated successfully"
-      logger.debug "* Updated: #{@page.to_s}"
-      logger.debug page_params
+      page_params[:paragraph_collections_attributes].keys.each do |collection_key|
+        update_caption_translation(page_params[:paragraph_collections_attributes][collection_key][:paragraphs_attributes].values)
+        flash.notice = "Updated successfully"
+        logger.debug "* Updated: #{@page.to_s}"
+        logger.debug page_params
+      end
     else
       puts "ERROR WHEN UPDATING ATTRIBUTES"
       logger.debug @page.errors.full_messages
@@ -54,5 +66,15 @@ class Admin::MultiParagraphPageController < Admin::PageController
         p.update_caption_translation(par[:images_attributes])
       end
     end
+  end
+
+  private
+  # Get a rails-style params hash for +date+.
+  def get_date_hash(date)
+    {
+      "date(1i)" => date.year.to_s,
+      "date(2i)" => date.month.to_s,
+      "date(3i)" => date.day.to_s
+    }
   end
 end

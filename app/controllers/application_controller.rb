@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
   # end
 
   def set_locale
+    if Rails.env.test?
+      return
+    end
+
     if params.has_key?(:locale)
       I18n.locale = params[:locale]
       logger.debug "Set locale from params: #{I18n.locale}"

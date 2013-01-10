@@ -81,6 +81,13 @@ module ApplicationHelper
     line_input(t(:title), symbol, title, form, disabled)
   end
 
+  def admin_line_input(symbol, translation_tag, css_class, form=nil)
+    render_partial('admin_line_input', {:translation_tag => translation_tag,
+                                        :symbol => symbol,
+                                        :css_class => css_class,
+                                        :form => form})
+  end
+
   def line_input_caption(symbol=:caption, caption='', form=nil, disabled=false)
     line_input(t(:caption), symbol, caption, form, disabled)
   end
@@ -132,6 +139,14 @@ module ApplicationHelper
   def t_for_locale(locale, tag)
     begin
       I18n.backend.translate(locale, tag)
+    rescue
+      ""
+    end
+  end
+
+  def t_for_default_locale(tag)
+    begin
+      I18n.backend.translate(I18n.default_locale, tag)
     rescue
       ""
     end

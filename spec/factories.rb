@@ -30,3 +30,23 @@ FactoryGirl.define do
     paragraphs  []
   end
 end
+
+FactoryGirl.define do
+  factory :about do
+    factory :original_about_page do
+      page_title              I18n.translate(:about_page_title)
+      people_title            I18n.translate(:about_people_title)
+      work_title              I18n.translate(:about_work_title)
+      contact_title           I18n.translate(:about_contact_title)
+      contact_email_address   I18n.translate(:contact_email_address)
+    end
+
+    factory :updated_about_page do
+      page_title              "new page title"
+      people_title            "new people title"
+      work_title              "new work title"
+      contact_title           "new contact title"
+      contact_email_address   "new@email.address"
+    end
+  end
+end

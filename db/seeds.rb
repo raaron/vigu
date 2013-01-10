@@ -12,6 +12,7 @@ include ApplicationHelper
 home_page = Page.create(name: "home")
 news_page = Page.create(name: "news")
 partners_page = Page.create(name: "partners")
+about_page = Page.create(name: "about")
 
 [home_page, news_page, partners_page].each do |page|
   paragraph_collection = ParagraphCollection.create(page: page, section: "main")
@@ -25,6 +26,51 @@ partners_page = Page.create(name: "partners")
     end
   end
 
+end
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {:about_page_title => "About us"})
+  I18n.backend.store_translations(locale, {:about_people_title => "Persons"})
+  I18n.backend.store_translations(locale, {:about_work_title => "How we work"})
+  I18n.backend.store_translations(locale, {:about_contact_title => "Contact"})
+end
+
+I18n.backend.store_translations(I18n.default_locale, {:contact_email_address => "nicola.roten@vision-guatemala.org"})
+
+about_people_paragraph_collection = ParagraphCollection.create(page: about_page, section: "people")
+p_nicola = Paragraph.create(paragraph_collection: about_people_paragraph_collection,
+                            date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_nicola.get_title_tag => "Nicola Roten"})
+  I18n.backend.store_translations(locale, {p_nicola.get_body_tag => "From Switzerland."})
+end
+
+p_cesar = Paragraph.create(paragraph_collection: about_people_paragraph_collection,
+                           date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_cesar.get_title_tag => "Cesar"})
+  I18n.backend.store_translations(locale, {p_cesar.get_body_tag => "From Guatemala."})
+end
+
+
+
+about_work_paragraph_collection = ParagraphCollection.create(page: about_page, section: "work")
+p_credits = Paragraph.create(paragraph_collection: about_work_paragraph_collection,
+                             date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_credits.get_title_tag => "Micro finance"})
+  I18n.backend.store_translations(locale, {p_credits.get_body_tag => "Over 100 women participated on this project."})
+end
+
+p_education = Paragraph.create(paragraph_collection: about_work_paragraph_collection,
+                               date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_education.get_title_tag => "Education"})
+  I18n.backend.store_translations(locale, {p_education.get_body_tag => "The children of our women get educated."})
 end
 
 u = User.create(fname: "Aaron", lname: "Richiger", email: "a.richi@bluewin.ch",

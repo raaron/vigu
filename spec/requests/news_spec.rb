@@ -13,7 +13,7 @@ describe "News" do
   subject { page }
 
   before do
-    app.default_url_options = { :locale => :es }
+    set_default_locale_for_tests
     login_user(FactoryGirl.create(:admin))
   end
 

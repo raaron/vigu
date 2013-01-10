@@ -13,11 +13,15 @@ class Page < ActiveRecord::Base
   attr_accessible :name, :paragraph_collections_attributes
   accepts_nested_attributes_for :paragraph_collections, :allow_destroy => true
 
+  def get_paragraph_collection(section)
+    paragraph_collections.find_by_section(section)
+  end
+
   def get_paragraphs(section)
-    paragraph_collections.find_by_section(section).paragraphs
+    get_paragraph_collection(section).paragraphs
   end
 
   def to_s
-    "Page:\n\t\tID: #{id}\n\t\tName: #{name}\n\t\t" + paragraph_collection.first.paragraphs.map{|p| p.to_s}.join("\n\t\t")
+    "Page:\n\t\tID: #{id}\n\t\tName: #{name}"
   end
 end

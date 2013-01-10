@@ -8,21 +8,23 @@ describe Paragraph do
     expect {yield}.to(change(Translation, :count).by(count))
   end
 
-  def check_change_all_text
+  def check_change_text_in_default_language
     should_change_translations_by(0) { @paragraph.update_attributes(default_title: new_default_title) }
     @paragraph.get_default_title.should == new_default_title
     should_change_translations_by(0) { @paragraph.update_attributes(default_body: new_default_body) }
     @paragraph.get_default_body.should == new_default_body
+  end
 
+  def check_change_text_not_in_default_language
     should_change_translations_by(0) { @paragraph.update_attributes(title: new_title) }
     should_change_translations_by(0) { @paragraph.update_attributes(body: new_body) }
 
     @paragraph.get_title.should == new_title
     @paragraph.get_body.should == new_body
-end
+  end
 
   before do
-    I18n.locale = :en
+    I18n.locale = :es
     @paragraph = Paragraph.new(paragraph_collection: home_page.paragraph_collections.find_by_section(:main),
                                default_title: "title spanish",
                                title: "title deutsch",
@@ -73,12 +75,12 @@ end
       let(:new_body)  { "new body english" }
 
       it "in default locale" do
-        check_change_all_text
+        check_change_text_in_default_language
       end
 
       describe "not in default locale" do
         before {I18n.locale = :de}
-        it { check_change_all_text }
+        it { check_change_text_not_in_default_language }
       end
     end
 

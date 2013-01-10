@@ -48,8 +48,8 @@ describe Image do
     should_change_translations_by(3) { @image.save }
     should_change_translations_by(0) { @image.update_translations_from_params(get_new_images_hash) }
 
-    @image.get_default_caption.should == default_caption
     if is_default_locale
+      @image.get_default_caption.should == default_caption
       @image.get_caption.should == default_caption
     else
       @image.get_caption.should == caption
@@ -62,9 +62,9 @@ describe Image do
     params["0"][:default_caption] = new_default_caption
     params["0"][:caption] = new_caption
     @image.update_translations_from_params(params)
-    @image.get_default_caption.should == new_default_caption
     if is_default_locale
-      @image.get_caption.should == ''
+      @image.get_default_caption.should == new_default_caption
+      @image.get_caption.should == new_default_caption
     else
       @image.get_caption.should == new_caption
     end
@@ -72,6 +72,7 @@ describe Image do
 
 
   before do
+    I18n.locale = :es
     @image = Image.new(paragraph: paragraph, :photo => File.new(Rails.root.join('spec', 'fixtures', 'foo.png'), 'r'))
   end
 

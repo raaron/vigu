@@ -4,7 +4,7 @@ include ApplicationHelper
 describe "Authentication" do
   let(:home_page)  { Page.find_by_name("home") }
 
-  before { app.default_url_options = { :locale => :de } }
+  before { set_non_default_locale_for_tests }
 
   subject { page }
 
