@@ -162,18 +162,22 @@ module ParagraphSpecHelper
 
     describe "add multiple pictures with caption" do
       before do
-        add_picture_with_caption(0)
-        check_click_add_picture_changes_translation_count
-        check_image_visible(0)
-        add_picture_with_caption(1)
+        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+          add_picture_with_caption(0)
+          check_click_add_picture_changes_translation_count
+          check_image_visible(0)
+          add_picture_with_caption(1)
+        end
       end
 
       it {
-        check_click_save_changes_translation_count_by(3)
-        check_image_count(2)
-        check_image_visible(1)
-        check_caption(0)
-        check_caption(1)
+        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+          check_click_save_changes_translation_count_by(3)
+          check_image_count(2)
+          check_image_visible(1)
+          check_caption(0)
+          check_caption(1)
+        end
       }
     end
 
@@ -218,22 +222,26 @@ module ParagraphSpecHelper
 
     describe "Delete multiple pictures" do
       before do
-        add_picture_with_caption(0)
-        check_click_add_picture_changes_translation_count
-        check_image_visible(0)
-        add_picture_with_caption(1)
-        check_click_save_changes_translation_count_by(3)
-        check_image_count(2)
-        check_image_visible(1)
+        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+          add_picture_with_caption(0)
+          check_click_add_picture_changes_translation_count
+          check_image_visible(0)
+          add_picture_with_caption(1)
+          check_click_save_changes_translation_count_by(3)
+          check_image_count(2)
+          check_image_visible(1)
+        end
       end
 
       it {
-        check (paragraph_html_tag + '_images_attributes_0__destroy')
-        check (paragraph_html_tag + '_images_attributes_1__destroy')
-        check_click_save_changes_translation_count_by(-6)
-        check_image_count(0)
-        check_image_not_visible(0)
-        check_image_not_visible(0)
+        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+          check (paragraph_html_tag + '_images_attributes_0__destroy')
+          check (paragraph_html_tag + '_images_attributes_1__destroy')
+          check_click_save_changes_translation_count_by(-6)
+          check_image_count(0)
+          check_image_not_visible(0)
+          check_image_not_visible(0)
+        end
       }
     end
   end

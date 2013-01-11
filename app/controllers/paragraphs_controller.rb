@@ -51,10 +51,5 @@ class ParagraphsController < ApplicationController
     @paragraph = Paragraph.find(params[:id])
     @paragraph.destroy
     redirect_to request.referrer
-
-    # respond_to do |format|
-    #   format.html { redirect_to paragraphs_url }
-    #   format.json { head :no_content }
-    # end
   end
 end

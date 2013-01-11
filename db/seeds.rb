@@ -38,7 +38,7 @@ end
 
 paragraph_collection = ParagraphCollection.create(page: partners_page,
                                                   section: "main",
-                                                  picture_mode: :exactly_one,
+                                                  picture_mode: :at_most_one,
                                                   has_date: false,
                                                   has_caption: false)
 
@@ -52,7 +52,7 @@ paragraph_collection = ParagraphCollection.create(page: partners_page,
 end
 
 
-
+########################## About us ###########################################
 
 [:de, :en, :es].each do |locale|
   I18n.backend.store_translations(locale, {:about_page_title => "About us"})
@@ -63,7 +63,11 @@ end
 
 I18n.backend.store_translations(I18n.default_locale, {:contact_email_address => "nicola.roten@vision-guatemala.org"})
 
-about_people_paragraph_collection = ParagraphCollection.create(page: about_page, section: "people")
+about_people_paragraph_collection = ParagraphCollection.create(page: about_page,
+                                                               section: "people",
+                                                               picture_mode: :at_most_one,
+                                                               has_date: false,
+                                                               has_caption: false)
 p_nicola = Paragraph.create(paragraph_collection: about_people_paragraph_collection,
                             date: Date.today)
 
@@ -82,7 +86,11 @@ end
 
 
 
-about_work_paragraph_collection = ParagraphCollection.create(page: about_page, section: "work")
+about_work_paragraph_collection = ParagraphCollection.create(page: about_page,
+                                                             section: "work",
+                                                             picture_mode: :any,
+                                                             has_date: false,
+                                                             has_caption: true)
 p_credits = Paragraph.create(paragraph_collection: about_work_paragraph_collection,
                              date: Date.today)
 
@@ -98,6 +106,9 @@ p_education = Paragraph.create(paragraph_collection: about_work_paragraph_collec
   I18n.backend.store_translations(locale, {p_education.get_title_tag => "Education"})
   I18n.backend.store_translations(locale, {p_education.get_body_tag => "The children of our women get educated."})
 end
+
+
+########################## Users ##############################################
 
 u = User.create(fname: "Aaron", lname: "Richiger", email: "a.richi@bluewin.ch",
                 password: "asdfasdf", password_confirmation: "asdfasdf")

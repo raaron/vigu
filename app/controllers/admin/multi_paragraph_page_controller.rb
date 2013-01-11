@@ -45,24 +45,12 @@ class Admin::MultiParagraphPageController < Admin::PageController
     if @page.update_attributes(page_params)
       page_params[:paragraph_collections_attributes].keys.each do |collection_key|
         update_caption_translation(page_params[:paragraph_collections_attributes][collection_key][:paragraphs_attributes].values)
-        flash.notice = "Updated successfully"
-        logger.debug "* Updated: #{@page.to_s}"
-        logger.debug page_params
       end
     else
-      puts "ERROR WHEN UPDATING ATTRIBUTES"
-      logger.debug @page.errors.full_messages
-      flash.notice = @page.errors.full_messages
+      logger.error @page.errors.full_messages + params.to_s
     end
 
-    # Finally, check, whether the pressed submit button was a "Add Link" button
-    if params[:add_link]
-      link_text = " link(#{t(:visible_text)}, #{t(:invisible_url)}) "
-      p = Paragraph.find(params[:add_link].keys.first)
-      p.update_attributes({title: p.get_title, body: p.get_body + link_text})
-    end
-
-    redirect_to request.referrer
+    super
   end
 
   private
@@ -75,7 +63,6 @@ class Admin::MultiParagraphPageController < Admin::PageController
     end
   end
 
-  private
   # Get a rails-style params hash for +date+.
   def get_date_hash(date)
     {

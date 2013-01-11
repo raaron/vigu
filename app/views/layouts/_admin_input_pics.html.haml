@@ -1,11 +1,23 @@
+- c = @paragraph.paragraph_collection
+- is_any = c.picture_mode_is_any?
+- is_exactly_or_at_most_one = (c.picture_mode_is_at_most_one? or c.picture_mode_is_exactly_one?)
+- needs_new_form = (is_any or (is_exactly_or_at_most_one and (@paragraph.images.count == 0)))
+- needs_change_button = (is_exactly_or_at_most_one and (@paragraph.images.count == 1))
+
 = form.fields_for :images do |builder|
   - @image = builder.object
   - if @image.new_record?
-    = render_partial(:admin_input_new_pic, {:form => builder})
+    - if needs_new_form
+      = render_partial(:admin_input_new_pic, {:form => builder})
   - else
     = render_partial(:admin_input_existing_pic, {:form => builder})
 
 - if is_default_locale
-  = render_partial(:admin_row,
-    {:left => form.submit(t_add(:picture)),
-     :right => ''})
+  - if c.picture_mode_is_any?
+    = render_partial(:admin_row,
+      {:left => form.submit(t_add(:picture)),
+       :right => ''})
+  - elsif needs_change_button
+    = render_partial(:admin_row,
+      {:left => form.submit(t_change(:picture), :name => "change_img[#{@paragraph.id}]"),
+       :right => ''})

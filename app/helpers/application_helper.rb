@@ -55,6 +55,10 @@ module ApplicationHelper
     translate_combined(symbol_noun, :edit)
   end
 
+  def t_change(symbol_noun)
+    translate_combined(symbol_noun, :change)
+  end
+
   def t_insert(symbol_noun)
     translate_combined(symbol_noun, :insert)
   end

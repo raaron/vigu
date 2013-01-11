@@ -1,4 +1,4 @@
-- button = form.submit(t_insert(:link), {:name => "add_link[#{@paragraph.id}]"})
+- button = form.submit(t_insert(:link), {:name => "add_link[#{@paragraph.id}]", :id => "add_link[#{@paragraph.id}]"})
 
 = render_partial(:admin_row,
   {:left => is_default_locale ? button : "",

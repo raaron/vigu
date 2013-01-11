@@ -15,16 +15,14 @@ class Admin::SingleParagraphPageController < Admin::PageController
   end
 
   def update
-    link_text = " link(#{t(:visible_text)}, #{t(:invisible_url)}) "
-    params[:paragraph][:body] += link_text if params[:add_link]
-
     @paragraph = Paragraph.find_by_id(params[:id])
     if @paragraph.update_attributes(params[:paragraph])
       @paragraph.update_caption_translation(params[:paragraph][:images_attributes])
     else
-      flash.notice = "ERROR" + @paragraph.errors.full_messages.to_s
+      logger.error @page.errors.full_messages + params.to_s
     end
-    redirect_to request.referrer
+
+    super
   end
 
   def sort

@@ -1,7 +1,10 @@
+#encoding: UTF-8
+
 require 'spec_helper'
 include ApplicationHelper
 # require 'support/paragraph_spec_helpers.rb'
 include ParagraphSpecHelper
+
 
 def check_content
   should have_content(t(:about_us).capitalize)
@@ -46,8 +49,6 @@ def check_non_default_language_content_invisible
   should_not have_css("input#about_disabled_work_title")
   should_not have_css("input#about_disabled_contact_title")
 end
-
-
 
 
 describe Admin::AboutController do
@@ -101,6 +102,11 @@ describe Admin::AboutController do
           find_field("#{html_tag}_body").value[1 .. -1].should == updated_person.body
           find_field("#{html_tag}_disabled_body").value[1 .. -1].should == original_person.get_default_body
         }
+
+        describe "when pressing add_link" do
+          before { click_button("add_link[#{original_person.id}]") }
+          it { find_field("#{html_tag}_body").value[1 .. -1].should == updated_person.body + " link(#{t(:visible_text)}, #{t(:invisible_url)}) " }
+        end
       end
 
 

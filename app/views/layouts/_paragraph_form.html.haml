@@ -6,4 +6,5 @@
   = render_partial(:admin_input_add_link, {:form => form})
   - if @paragraph.has_date?
     = render_partial(:admin_input_date, {:form => form})
-  = render_partial(:admin_input_pics, {:form => form})
+  - if not @paragraph.paragraph_collection.picture_mode_is_zero?
+    = render_partial(:admin_input_pics, {:form => form})
