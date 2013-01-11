@@ -7,11 +7,4 @@ class Admin::AboutController < Admin::MultiParagraphPageController
     super
   end
 
-private
-  # Force absolute URLs on the profile tab.
-  def rewrite_options(options)
-    puts "REWRITE"
-    super(action_name == 'profile' ? options.merge(:only_path => false) : options)
-  end
-
 end

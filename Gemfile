@@ -29,6 +29,7 @@ gem "paperclip", "~> 3.0"
 gem 'i18n-active_record',
       :git => 'git://github.com/svenfuchs/i18n-active_record.git',
       :require => 'i18n/active_record'
+gem 'enumerated_attribute', :git => 'git://github.com/jeffp/enumerated_attribute.git'
 
 group :test do
   gem 'capybara', '1.1.2'

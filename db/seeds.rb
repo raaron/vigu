@@ -14,8 +14,14 @@ news_page = Page.create(name: "news")
 partners_page = Page.create(name: "partners")
 about_page = Page.create(name: "about")
 
-[home_page, news_page, partners_page].each do |page|
-  paragraph_collection = ParagraphCollection.create(page: page, section: "main")
+########################## Home, News #########################################
+
+[home_page, news_page].each do |page|
+  paragraph_collection = ParagraphCollection.create(page: page,
+                                                    section: "main",
+                                                    picture_mode: :any,
+                                                    has_date: true,
+                                                    has_caption: true)
 
   3.times do |nr|
     p = Paragraph.create(paragraph_collection: paragraph_collection, date: Date.today)
@@ -27,6 +33,26 @@ about_page = Page.create(name: "about")
   end
 
 end
+
+########################## Parnters ###########################################
+
+paragraph_collection = ParagraphCollection.create(page: partners_page,
+                                                  section: "main",
+                                                  picture_mode: :exactly_one,
+                                                  has_date: false,
+                                                  has_caption: false)
+
+3.times do |nr|
+  p = Paragraph.create(paragraph_collection: paragraph_collection, date: Date.today)
+
+  [:de, :en, :es].each do |locale|
+    I18n.backend.store_translations(locale, {p.get_title_tag => "#{partners_page.name.capitalize} #{nr}"})
+    I18n.backend.store_translations(locale, {p.get_body_tag => lorem(300)})
+  end
+end
+
+
+
 
 [:de, :en, :es].each do |locale|
   I18n.backend.store_translations(locale, {:about_page_title => "About us"})

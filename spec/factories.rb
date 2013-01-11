@@ -3,9 +3,14 @@ FactoryGirl.define do
     sequence(:id)  { |n| n }
     sequence(:title)  { |n| "Title #{n}" }
     sequence(:body)   { |n| "Body #{n}"}
-    section "main"
-    page Page.first
+    paragraph_collection Page.first.paragraph_collections.first
     date Date.new(2012, 1, 31)
+
+    factory :updated_person do
+      id         1000
+      title      "new name"
+      body       "new description"
+    end
   end
 end
 
@@ -48,5 +53,6 @@ FactoryGirl.define do
       contact_title           "new contact title"
       contact_email_address   "new@email.address"
     end
+
   end
 end

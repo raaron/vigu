@@ -59,7 +59,7 @@ module ParagraphSpecHelper
   def change_everything_and_save
     change_title
     change_body
-    change_date
+    change_date if edited_paragraph.has_date?
     add_picture_with_caption(0)
     check_click_save_changes_translation_count_by(3)
   end
@@ -131,11 +131,14 @@ module ParagraphSpecHelper
       }
     end
 
+
     describe "change date" do
-      before { change_date }
+      before { change_date if edited_paragraph.has_date? }
       it {
-        check_click_save_changes_translation_count_by(0)
-        check_date
+        if edited_paragraph.has_date?
+          check_click_save_changes_translation_count_by(0)
+          check_date
+        end
       }
     end
 
@@ -193,7 +196,7 @@ module ParagraphSpecHelper
       before { change_everything_and_save }
       it {
         check_everything_except_date
-        check_date
+        check_date if edited_paragraph.has_date?
       }
     end
 

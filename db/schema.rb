@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109233321) do
+ActiveRecord::Schema.define(:version => 20130111094043) do
 
   create_table "images", :force => true do |t|
     t.integer  "paragraph_id"
@@ -37,8 +37,11 @@ ActiveRecord::Schema.define(:version => 20130109233321) do
   create_table "paragraph_collections", :force => true do |t|
     t.integer  "page_id"
     t.string   "section"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "picture_mode"
+    t.boolean  "has_caption"
+    t.boolean  "has_date"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "paragraphs", :force => true do |t|

@@ -88,4 +88,16 @@ class Paragraph < ActiveRecord::Base
   def get_tag(part)
     [paragraph_collection.page.name, paragraph_collection.section, id, part].join('_')
   end
+
+  def has_date?
+    paragraph_collection.has_date?
+  end
+
+  def has_caption?
+    paragraph_collection.has_caption?
+  end
+
+  def picture_mode
+    paragraph_collection.picture_mode
+  end
 end

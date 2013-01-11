@@ -50,6 +50,9 @@ describe Paragraph do
   it { should respond_to(:insert_empty_translation) }
   it { should respond_to(:remove_translation) }
   it { should respond_to(:update_caption_translation) }
+  it { should respond_to(:has_date?) }
+  it { should respond_to(:has_caption?) }
+  it { should respond_to(:picture_mode) }
 
   it { should be_valid }
 

@@ -1,5 +1,7 @@
 require 'spec_helper'
 include ApplicationHelper
+# require 'support/paragraph_spec_helpers.rb'
+include ParagraphSpecHelper
 
 def check_content
   should have_content(t(:about_us).capitalize)
@@ -52,6 +54,8 @@ describe Admin::AboutController do
 
   let(:original_about_page)  { FactoryGirl.create(:original_about_page) }
   let(:updated_about_page)  { FactoryGirl.create(:updated_about_page) }
+  let(:original_person)  { Page.find_by_name("about").get_paragraphs("people")[0] }
+  let(:updated_person)  { FactoryGirl.create(:updated_person) }
 
   subject {page}
 
@@ -71,28 +75,71 @@ describe Admin::AboutController do
       before do
         set_non_default_locale_for_tests
         visit admin_about_path
-        update_page_content
       end
 
-      it {
-        check_translations_on_save
-        check_page(updated_about_page, disabled=false)
-        check_page(original_about_page, disabled=true)
-      }
+      describe "when updating page content" do
+        before { update_page_content }
+
+        it {
+          check_translations_on_save
+          check_page(updated_about_page, disabled=false)
+          check_page(original_about_page, disabled=true)
+        }
+      end
+
+      describe "when updating a person" do
+        let(:html_tag)  { "about_paragraph_collections_attributes_0_paragraphs_attributes_0" }
+        before do
+          fill_in "#{html_tag}_title", with: updated_person.title
+          fill_in "#{html_tag}_body", with: updated_person.body
+        end
+
+        it {
+          check_translations_on_save
+          find_field("#{html_tag}_title").value.should == updated_person.title
+          find_field("#{html_tag}_default_title").value.should == original_person.get_default_title
+          find_field("#{html_tag}_body").value[1 .. -1].should == updated_person.body
+          find_field("#{html_tag}_default_body").value[1 .. -1].should == original_person.get_default_body
+        }
+      end
+
+
     end
 
     describe "in default locale" do
       before do
         set_default_locale_for_tests
         visit admin_about_path
-        update_page_content
       end
 
-      it {
-        check_translations_on_save
-        check_page(updated_about_page, disabled=false)
-        check_non_default_language_content_invisible
-      }
+      describe "when updating page content" do
+        before { update_page_content }
+
+        it {
+          check_translations_on_save
+          check_page(updated_about_page, disabled=false)
+          check_non_default_language_content_invisible
+        }
+      end
+
+      describe "when updating a person" do
+        let(:html_tag)  { "about_paragraph_collections_attributes_0_paragraphs_attributes_0" }
+        let(:reference_paragraph) {original_person}
+        before do
+          fill_in "#{html_tag}_default_title", with: updated_person.title
+          fill_in "#{html_tag}_default_body", with: updated_person.body
+          add_file(html_tag, 0, "foo.png")
+        end
+
+        it {
+          expect { click_button t(:save) }.to(change(Translation, :count).by(3))
+          find_field("#{html_tag}_default_title").value.should == updated_person.title
+          find_field("#{html_tag}_default_body").value[1 .. -1].should == updated_person.body
+          check_image_visible(0)
+          should_not have_css("input##{html_tag}_title")
+          should_not have_css("textarea##{html_tag}_body")
+        }
+      end
     end
   end
 

@@ -54,7 +54,6 @@ describe "Partners" do
 
       it {
         check_everything_except_date
-        check_visibility(l(reference_paragraph.date))
       }
 
     end
