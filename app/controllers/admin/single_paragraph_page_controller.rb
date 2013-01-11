@@ -16,11 +16,8 @@ class Admin::SingleParagraphPageController < Admin::PageController
 
   def update
     link_text = " link(#{t(:visible_text)}, #{t(:invisible_url)}) "
-    if params[:add_link_default]
-      params[:paragraph][:default_body] += link_text
-    elsif params[:add_link]
-      params[:paragraph][:body] += link_text
-    end
+    params[:paragraph][:body] += link_text if params[:add_link]
+
     @paragraph = Paragraph.find_by_id(params[:id])
     if @paragraph.update_attributes(params[:paragraph])
       @paragraph.update_caption_translation(params[:paragraph][:images_attributes])

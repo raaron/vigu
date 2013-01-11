@@ -9,9 +9,9 @@ describe Paragraph do
   end
 
   def check_change_text_in_default_language
-    should_change_translations_by(0) { @paragraph.update_attributes(default_title: new_default_title) }
+    should_change_translations_by(0) { @paragraph.update_attributes(title: new_default_title) }
     @paragraph.get_default_title.should == new_default_title
-    should_change_translations_by(0) { @paragraph.update_attributes(default_body: new_default_body) }
+    should_change_translations_by(0) { @paragraph.update_attributes(body: new_default_body) }
     @paragraph.get_default_body.should == new_default_body
   end
 
@@ -26,18 +26,14 @@ describe Paragraph do
   before do
     I18n.locale = :es
     @paragraph = Paragraph.new(paragraph_collection: home_page.paragraph_collections.find_by_section(:main),
-                               default_title: "title spanish",
                                title: "title deutsch",
-                               default_body: "body spanish",
                                body: "body deutsch",
                                date: Date.today)
   end
 
   subject { @paragraph }
 
-  it { should respond_to(:default_title) }
   it { should respond_to(:title) }
-  it { should respond_to(:default_body) }
   it { should respond_to(:body) }
   it { should respond_to(:paragraph_collection) }
   it { should respond_to(:images) }
@@ -63,8 +59,8 @@ describe Paragraph do
 
   it "when inserting" do
     should_change_translations_by(6) { @paragraph.save }
-    @paragraph.get_default_title.should == @paragraph.default_title
-    @paragraph.get_default_body.should == @paragraph.default_body
+    @paragraph.get_default_title.should == @paragraph.title
+    @paragraph.get_default_body.should == @paragraph.body
   end
 
   describe "when updating an existing paragraph" do
@@ -103,7 +99,7 @@ describe Paragraph do
     before {
       I18n.locale = :de
       @paragraph.save
-      @paragraph.update_attributes({"default_title"=>"", "title"=>"newt", "default_body"=>"", "body"=>"new body", "date(3i)"=>"1", "date(2i)"=>"1", "date(1i)"=>"2013", "images_attributes"=>{"0"=>{"default_caption"=>"", "caption"=>""}}, "id"=>"7"})
+      @paragraph.update_attributes({"title"=>"newt", "body"=>"new body", "date(3i)"=>"1", "date(2i)"=>"1", "date(1i)"=>"2013", "images_attributes"=>{"0"=>{"caption"=>""}}, "id"=>"7"})
     }
     it {
       Paragraph.last.get_title.should == "newt" }

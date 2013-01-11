@@ -97,9 +97,9 @@ describe Admin::AboutController do
         it {
           check_translations_on_save
           find_field("#{html_tag}_title").value.should == updated_person.title
-          find_field("#{html_tag}_default_title").value.should == original_person.get_default_title
+          find_field("#{html_tag}_disabled_title").value.should == original_person.get_default_title
           find_field("#{html_tag}_body").value[1 .. -1].should == updated_person.body
-          find_field("#{html_tag}_default_body").value[1 .. -1].should == original_person.get_default_body
+          find_field("#{html_tag}_disabled_body").value[1 .. -1].should == original_person.get_default_body
         }
       end
 
@@ -126,18 +126,18 @@ describe Admin::AboutController do
         let(:html_tag)  { "about_paragraph_collections_attributes_0_paragraphs_attributes_0" }
         let(:reference_paragraph) {original_person}
         before do
-          fill_in "#{html_tag}_default_title", with: updated_person.title
-          fill_in "#{html_tag}_default_body", with: updated_person.body
+          fill_in "#{html_tag}_title", with: updated_person.title
+          fill_in "#{html_tag}_body", with: updated_person.body
           add_file(html_tag, 0, "foo.png")
         end
 
         it {
           expect { click_button t(:save) }.to(change(Translation, :count).by(3))
-          find_field("#{html_tag}_default_title").value.should == updated_person.title
-          find_field("#{html_tag}_default_body").value[1 .. -1].should == updated_person.body
+          find_field("#{html_tag}_title").value.should == updated_person.title
+          find_field("#{html_tag}_body").value[1 .. -1].should == updated_person.body
           check_image_visible(0)
-          should_not have_css("input##{html_tag}_title")
-          should_not have_css("textarea##{html_tag}_body")
+          should_not have_css("input##{html_tag}_disabled_title")
+          should_not have_css("textarea##{html_tag}_disabled_body")
         }
       end
     end

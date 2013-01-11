@@ -1,3 +1,5 @@
+- left_symbol = is_default_locale ? "title" : "disabled_title"
+
 = render_partial(:admin_row,
-  {:left => line_input_title(symbol=:default_title, title=@paragraph.get_default_title, form=form, disabled=(not is_default_locale)),
+  {:left => line_input_title(symbol=left_symbol, title=@paragraph.get_default_title, form=form, disabled=(not is_default_locale)),
    :right => line_input_title(symbol=:title, title=@paragraph.get_title, form=form, disabled=false)})

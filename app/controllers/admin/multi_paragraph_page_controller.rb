@@ -55,6 +55,13 @@ class Admin::MultiParagraphPageController < Admin::PageController
       flash.notice = @page.errors.full_messages
     end
 
+    # Finally, check, whether the pressed submit button was a "Add Link" button
+    if params[:add_link]
+      link_text = " link(#{t(:visible_text)}, #{t(:invisible_url)}) "
+      p = Paragraph.find(params[:add_link].keys.first)
+      p.update_attributes({title: p.get_title, body: p.get_body + link_text})
+    end
+
     redirect_to request.referrer
   end
 

@@ -5,6 +5,7 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'acts_as_list'
 
 group :development, :test do
+  gem 'rails-footnotes', '>= 3.7.9'
   gem 'launchy'
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.11.0'

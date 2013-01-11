@@ -14,7 +14,7 @@ describe "Home" do
 
   def add_file_with_caption(nr, filename, caption)
     add_file(nr, filename)
-    fill_in "paragraph_images_attributes_#{nr}_default_caption",  with: caption
+    fill_in "paragraph_images_attributes_#{nr}_caption",  with: caption
   end
 
   before {
@@ -27,8 +27,8 @@ describe "Home" do
   describe "Content" do
     before do
       visit edit_paragraph_path(Paragraph.first)
-      fill_in "paragraph_default_title", with: paragraph.title
-      fill_in "paragraph_default_body",  with: paragraph.body
+      fill_in "paragraph_title", with: paragraph.title
+      fill_in "paragraph_body",  with: paragraph.body
       add_file_with_caption(0, 'foo.png', caption0)
       click_button t(:save)
       visit root_path

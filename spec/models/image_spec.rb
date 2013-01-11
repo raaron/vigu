@@ -18,7 +18,6 @@ describe Image do
 
   def get_image_hash_without_id(filename)
     image = HashWithIndifferentAccess.new
-    image[:default_caption] = default_caption
     image[:caption] = caption
     image[:photo] = fixture_file_upload(filename, 'image/png')
     return image
@@ -47,13 +46,7 @@ describe Image do
   def check_insert_image
     should_change_translations_by(3) { @image.save }
     should_change_translations_by(0) { @image.update_translations_from_params(get_new_images_hash) }
-
-    if is_default_locale
-      @image.get_default_caption.should == default_caption
-      @image.get_caption.should == default_caption
-    else
-      @image.get_caption.should == caption
-    end
+    @image.get_caption.should == caption
   end
 
   def check_update_image
@@ -62,12 +55,7 @@ describe Image do
     params["0"][:default_caption] = new_default_caption
     params["0"][:caption] = new_caption
     @image.update_translations_from_params(params)
-    if is_default_locale
-      @image.get_default_caption.should == new_default_caption
-      @image.get_caption.should == new_default_caption
-    else
-      @image.get_caption.should == new_caption
-    end
+    @image.get_caption.should == new_caption
   end
 
 
@@ -79,7 +67,6 @@ describe Image do
   subject { @image }
 
   it { should respond_to(:caption) }
-  it { should respond_to(:default_caption) }
   it { should respond_to(:photo) }
   it { should respond_to(:paragraph) }
   it { should respond_to(:get_caption) }
@@ -101,12 +88,13 @@ describe Image do
 
   describe "when creating a new image" do
 
-    it "in default locale" do
-      check_insert_image
+    describe "in default locale" do
+      before { I18n.locale = :es }
+      it { check_insert_image }
     end
 
     describe "not in default locale" do
-      before {I18n.locale = :de}
+      before { I18n.locale = :de }
       it { check_insert_image }
     end
   end

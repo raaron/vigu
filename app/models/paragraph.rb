@@ -14,8 +14,9 @@ class Paragraph < ActiveRecord::Base
 
   belongs_to :paragraph_collection
   has_many :images, :dependent => :destroy
-  attr_accessible :title, :body, :default_title, :default_body, :paragraph_collection, :images_attributes, :images, :date
-  attr_accessor :title, :body, :default_title, :default_body
+  attr_accessible :title, :body, :paragraph_collection, :images_attributes,
+                  :images, :date
+  attr_accessor :title, :body
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['photo'].blank? }
   after_destroy :remove_translation
   validates :paragraph_collection,  presence: true
@@ -54,13 +55,8 @@ class Paragraph < ActiveRecord::Base
   end
 
   def update_translation
-    if is_default_locale
-      update_translations(I18n.default_locale, {get_title_tag => default_title})
-      update_translations(I18n.default_locale, {get_body_tag => default_body})
-    else
-      update_translations(I18n.locale, {get_title_tag => title})
-      update_translations(I18n.locale, {get_body_tag => body})
-    end
+    update_translations(I18n.locale, {get_title_tag => title})
+    update_translations(I18n.locale, {get_body_tag => body})
   end
 
   def insert_empty_translation

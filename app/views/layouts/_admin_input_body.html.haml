@@ -1,3 +1,5 @@
+- left_symbol = is_default_locale ? "body" : "disabled_body"
+
 = render_partial(:admin_row,
-  {:left => text_input_body(symbol=:default_body, body=@paragraph.get_default_body, form=form, disabled=(not is_default_locale)),
+  {:left => text_input_body(symbol=left_symbol, body=@paragraph.get_default_body, form=form, disabled=(not is_default_locale)),
    :right => text_input_body(symbol=:body, body=@paragraph.get_body, form=form, disabled=false)})

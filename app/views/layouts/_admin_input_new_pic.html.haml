@@ -1,3 +1,5 @@
+- left_symbol = is_default_locale ? "caption" : "disabled_caption"
+
 - if is_default_locale
 
   = render_partial(:admin_row,
@@ -9,5 +11,5 @@
      :right => ''})
 
   = render_partial(:admin_row,
-    {:left => line_input_caption(symbol=:default_caption, caption='', form=form, disabled=(not is_default_locale)),
+    {:left => line_input_caption(symbol=left_symbol, caption='', form=form, disabled=(not is_default_locale)),
      :right => line_input_caption(symbol=:caption, caption='', form=form, disabled=false)})
