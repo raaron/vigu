@@ -4,11 +4,11 @@ include ParagraphSpecHelper
 include ApplicationHelper
 
 describe Paragraph do
-  let(:corresponding_page)  { Page.find_by_name("home") }
+  let(:corresponding_page)  { Page.find_by_name("news") }
   let(:section)  { "main" }
   let(:paragraph_html_tag)  { "paragraph" }
-  let(:reference_paragraph)  { get_test_paragraph(corresponding_page, section) }
-  let(:edited_paragraph)  { corresponding_page.get_paragraphs(:main).first }
+  let(:updated_paragraph)  { get_test_paragraph(corresponding_page, section) }
+  let(:original_paragraph)  { corresponding_page.get_paragraphs(:main).first }
 
   subject { page }
 
@@ -41,7 +41,7 @@ describe Paragraph do
   describe "Edit an existing paragraph" do
     let(:editable)  { true }
 
-    before { visit edit_paragraph_path(edited_paragraph) }
+    before { visit edit_paragraph_path(original_paragraph) }
     check_edit_paragraph
   end
 
@@ -54,14 +54,14 @@ describe Paragraph do
     let(:editable)  { false }
 
     before do
-      visit edit_paragraph_path(edited_paragraph)
+      visit edit_paragraph_path(original_paragraph)
       change_everything_and_save
-      visit paragraph_path(edited_paragraph)
+      visit paragraph_path(original_paragraph)
     end
 
     it {
       check_everything_except_date
-      check_visibility(l(reference_paragraph.date))
+      check_visibility(l(updated_paragraph.date))
     }
 
   end

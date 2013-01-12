@@ -14,20 +14,15 @@
     = get_admin_title_input("page", page_builder)
     = get_admin_title_input("people", page_builder)
 
-  = page_builder.fields_for :paragraph_collections, @people_collection do |collection_builder|
-    = collection_builder.fields_for :paragraphs do |paragraph_builder|
-      - @paragraph = paragraph_builder.object
-      = check_box_destroy(paragraph_builder)
-      = render_partial(:paragraph_form, {:form => paragraph_builder})
+  - @paragraph_collection = @people_collection
+  = render_partial(:paragraphs_form, {:form => page_builder})
+
 
   %table
     = get_admin_title_input("work", page_builder)
 
-  = page_builder.fields_for :paragraph_collections, @work_collection do |collection_builder|
-    = collection_builder.fields_for :paragraphs do |paragraph_builder|
-      - @paragraph = paragraph_builder.object
-      = check_box_destroy(paragraph_builder)
-      = render_partial(:paragraph_form, {:form => paragraph_builder})
+  - @paragraph_collection = @work_collection
+  = render_partial(:paragraphs_form, {:form => page_builder})
 
   %table
     = get_admin_title_input("contact", page_builder)

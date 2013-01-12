@@ -50,6 +50,7 @@ class Admin::MultiParagraphPageController < Admin::PageController
       logger.error @page.errors.full_messages + params.to_s
     end
 
+    check_is_add_paragraph_request
     super
   end
 
@@ -70,5 +71,16 @@ class Admin::MultiParagraphPageController < Admin::PageController
       "date(2i)" => date.month.to_s,
       "date(3i)" => date.day.to_s
     }
+  end
+
+  # Check, whether the pressed submit button was a "Add paragraph" button.
+  # Append a paragraph to this paragraph_collection in this case.
+  # IMPORTANT NOTE: Call this method after the +update_attributes()+ call,
+  # otherwise, the changes get owerridden.
+  def check_is_add_paragraph_request
+    if params[:add_paragraph]
+      col = ParagraphCollection.find(params[:add_paragraph].keys.first)
+      Paragraph.create(paragraph_collection: col, date: Date.today)
+    end
   end
 end

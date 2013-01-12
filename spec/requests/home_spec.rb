@@ -1,47 +1,41 @@
-#encoding: UTF-8
-
 require 'spec_helper'
-include SessionsHelper
+include ApplicationHelper
 
-describe "Home" do
-  let(:home_page)  { Page.find_by_name("home") }
-  let(:paragraph)  { home_page.get_paragraphs(:main).first }
-  let(:caption0)  { "caption0" }
+describe HomeController do
 
-  def add_file(nr, filename)
-    attach_file("paragraph_images_attributes_#{nr}_photo", Rails.root.join('spec', 'fixtures', filename))
+  def check_content
+    should have_content(t(:home).capitalize)
+    should have_content(t(:home_page_title))
+    should have_content(t(:home_people_title))
+    should have_content(t(:home_work_title))
+    should have_content(t(:home_contact_title))
   end
 
-  def add_file_with_caption(nr, filename, caption)
-    add_file(nr, filename)
-    fill_in "paragraph_images_attributes_#{nr}_caption",  with: caption
-  end
+  subject {page}
+  before { login_user(FactoryGirl.create(:user)) }
 
-  before {
-    app.default_url_options = { :locale => :es }
-    visit root_path
-  }
+  describe "in default locale" do
 
-  subject { page }
-
-  describe "Content" do
     before do
-      visit edit_paragraph_path(Paragraph.first)
-      fill_in "paragraph_title", with: paragraph.title
-      fill_in "paragraph_body",  with: paragraph.body
-      add_file_with_caption(0, 'foo.png', caption0)
-      click_button t(:save)
-      visit root_path
+      set_default_locale_for_tests
+      visit home_path
+    end
+
+    it { check_content }
+
+  end
+
+  describe "not in default locale" do
+
+    before do
+      set_non_default_locale_for_tests
+      visit home_path
     end
 
     it {
-      should have_content(paragraph.title)
-      should have_content(paragraph.body)
-      img_path = Rails.root.join('spec', 'fixtures', "foo.png")
-      should have_css("img", :src => img_path)
-      should have_content(caption0)
+      check_content
     }
-  end
 
+  end
 
 end

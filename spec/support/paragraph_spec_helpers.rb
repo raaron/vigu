@@ -1,55 +1,55 @@
 module ParagraphSpecHelper
 
   def change_title
-    fill_in paragraph_html_tag + "_title", with: reference_paragraph.title
+    fill_in paragraph_html_tag + "_title", with: updated_paragraph.title
   end
 
   def check_title
-    edited_paragraph.get_title.should == reference_paragraph.title
-    check_visibility(reference_paragraph.title)
+    original_paragraph.get_title.should == updated_paragraph.title
+    check_visibility(updated_paragraph.title)
   end
 
   def change_body
-    fill_in paragraph_html_tag + "_body", with: reference_paragraph.body
+    fill_in paragraph_html_tag + "_body", with: updated_paragraph.body
   end
 
   def check_body
-    edited_paragraph.get_body.should == reference_paragraph.body
-    check_visibility(reference_paragraph.body)
+    original_paragraph.get_body.should == updated_paragraph.body
+    check_visibility(updated_paragraph.body)
   end
 
   def change_date
-    select_date(reference_paragraph.date, :from => paragraph_html_tag + "_date")
+    select_date(updated_paragraph.date, :from => paragraph_html_tag + "_date")
   end
 
   def check_date
-    edited_paragraph.date == reference_paragraph.date
-    check_selected_date(reference_paragraph.date, :from => paragraph_html_tag + "_date")
+    original_paragraph.date == updated_paragraph.date
+    check_selected_date(updated_paragraph.date, :from => paragraph_html_tag + "_date")
   end
 
   def add_picture_without_caption(index)
-    add_file(paragraph_html_tag, index, reference_paragraph.images[index].photo_file_name)
+    add_file(paragraph_html_tag, index, updated_paragraph.images[index].photo_file_name)
   end
 
   def add_picture_with_caption(index)
-    img = reference_paragraph.images[index]
+    img = updated_paragraph.images[index]
     add_file_with_caption(paragraph_html_tag, index, img.photo_file_name, img.caption)
   end
 
   def check_image_count(count)
-    edited_paragraph.images.count.should == count
+    original_paragraph.images.count.should == count
   end
 
   def check_caption(index)
-    ref_caption = reference_paragraph.images[index].caption
-    edited_paragraph.images[index].get_caption.should == ref_caption
+    ref_caption = updated_paragraph.images[index].caption
+    original_paragraph.images[index].get_caption.should == ref_caption
     should have_selector("input", :value => ref_caption)
     check_visibility(ref_caption)
   end
 
   def check_click_save_changes_translation_count_by(count)
     check_translation_change_on_button_click(t(:save), 0, count)
-    edited_paragraph.reload
+    original_paragraph.reload
   end
 
   def check_click_add_picture_changes_translation_count
@@ -59,9 +59,11 @@ module ParagraphSpecHelper
   def change_everything_and_save
     change_title
     change_body
-    change_date if edited_paragraph.has_date?
-    add_picture_with_caption(0)
-    check_click_save_changes_translation_count_by(3)
+    if is_default_locale
+      change_date if original_paragraph.has_date?
+      original_paragraph.has_caption? ? add_picture_with_caption(0) : add_picture_without_caption(0)
+    end
+    check_click_save_changes_translation_count_by(is_default_locale ? 3 : 0)
   end
 
   def check_everything_except_date
@@ -80,11 +82,11 @@ module ParagraphSpecHelper
   end
 
   def check_image_visible(index)
-    should have_css("img", :src => reference_paragraph.images[index].photo_file_name)
+    should have_css("img", :src => updated_paragraph.images[index].photo_file_name)
   end
 
   def check_image_not_visible(index)
-    should_not have_css("img", :src => reference_paragraph.images[index].photo_file_name)
+    should_not have_css("img", :src => updated_paragraph.images[index].photo_file_name)
   end
 
   def add_file(tag, nr, filename)
@@ -133,9 +135,9 @@ module ParagraphSpecHelper
 
 
     describe "change date" do
-      before { change_date if edited_paragraph.has_date? }
+      before { change_date if original_paragraph.has_date? }
       it {
-        if edited_paragraph.has_date?
+        if original_paragraph.has_date?
           check_click_save_changes_translation_count_by(0)
           check_date
         end
@@ -162,7 +164,7 @@ module ParagraphSpecHelper
 
     describe "add multiple pictures with caption" do
       before do
-        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+        if original_paragraph.paragraph_collection.picture_mode_is_any?
           add_picture_with_caption(0)
           check_click_add_picture_changes_translation_count
           check_image_visible(0)
@@ -171,7 +173,7 @@ module ParagraphSpecHelper
       end
 
       it {
-        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+        if original_paragraph.paragraph_collection.picture_mode_is_any?
           check_click_save_changes_translation_count_by(3)
           check_image_count(2)
           check_image_visible(1)
@@ -191,7 +193,7 @@ module ParagraphSpecHelper
       end
 
       it {
-        edited_paragraph.images[0].get_caption.should == new_caption
+        original_paragraph.images[0].get_caption.should == new_caption
         should have_selector("input", :value => new_caption)
       }
     end
@@ -200,7 +202,7 @@ module ParagraphSpecHelper
       before { change_everything_and_save }
       it {
         check_everything_except_date
-        check_date if edited_paragraph.has_date?
+        check_date if original_paragraph.has_date?
       }
     end
 
@@ -222,7 +224,7 @@ module ParagraphSpecHelper
 
     describe "Delete multiple pictures" do
       before do
-        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+        if original_paragraph.paragraph_collection.picture_mode_is_any?
           add_picture_with_caption(0)
           check_click_add_picture_changes_translation_count
           check_image_visible(0)
@@ -234,7 +236,7 @@ module ParagraphSpecHelper
       end
 
       it {
-        if edited_paragraph.paragraph_collection.picture_mode_is_any?
+        if original_paragraph.paragraph_collection.picture_mode_is_any?
           check (paragraph_html_tag + '_images_attributes_0__destroy')
           check (paragraph_html_tag + '_images_attributes_1__destroy')
           check_click_save_changes_translation_count_by(-6)

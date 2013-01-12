@@ -2,7 +2,7 @@ require 'spec_helper'
 include ApplicationHelper
 
 describe Paragraph do
-  let(:home_page)  { Page.find_by_name("home") }
+  let(:news_page)  { Page.find_by_name("news") }
 
   def should_change_translations_by(count)
     expect {yield}.to(change(Translation, :count).by(count))
@@ -25,7 +25,7 @@ describe Paragraph do
 
   before do
     I18n.locale = :es
-    @paragraph = Paragraph.new(paragraph_collection: home_page.paragraph_collections.find_by_section(:main),
+    @paragraph = Paragraph.new(paragraph_collection: news_page.paragraph_collections.find_by_section(:main),
                                title: "title deutsch",
                                body: "body deutsch",
                                date: Date.today)
@@ -59,8 +59,8 @@ describe Paragraph do
 
   it "when inserting" do
     should_change_translations_by(6) { @paragraph.save }
-    @paragraph.get_default_title.should == @paragraph.title
-    @paragraph.get_default_body.should == @paragraph.body
+    @paragraph.get_title.should == @paragraph.title
+    @paragraph.get_body.should == @paragraph.body
   end
 
   describe "when updating an existing paragraph" do

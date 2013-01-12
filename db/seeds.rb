@@ -14,9 +14,9 @@ news_page = Page.create(name: "news")
 partners_page = Page.create(name: "partners")
 about_page = Page.create(name: "about")
 
-########################## Home, News #########################################
+################################ News #########################################
 
-[home_page, news_page].each do |page|
+[news_page].each do |page|
   paragraph_collection = ParagraphCollection.create(page: page,
                                                     section: "main",
                                                     picture_mode: :any,
@@ -100,6 +100,59 @@ p_credits = Paragraph.create(paragraph_collection: about_work_paragraph_collecti
 end
 
 p_education = Paragraph.create(paragraph_collection: about_work_paragraph_collection,
+                               date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_education.get_title_tag => "Education"})
+  I18n.backend.store_translations(locale, {p_education.get_body_tag => "The children of our women get educated."})
+end
+
+########################## Home ###########################################
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {:home_page_title => "Home"})
+  I18n.backend.store_translations(locale, {:home_people_title => "Persons"})
+  I18n.backend.store_translations(locale, {:home_work_title => "How we work"})
+  I18n.backend.store_translations(locale, {:home_contact_title => "Contact"})
+end
+
+home_people_paragraph_collection = ParagraphCollection.create(page: home_page,
+                                                               section: "people",
+                                                               picture_mode: :at_most_one,
+                                                               has_date: false,
+                                                               has_caption: false)
+p_nicola = Paragraph.create(paragraph_collection: home_people_paragraph_collection,
+                            date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_nicola.get_title_tag => "Nicola Roten"})
+  I18n.backend.store_translations(locale, {p_nicola.get_body_tag => "From Switzerland."})
+end
+
+p_cesar = Paragraph.create(paragraph_collection: home_people_paragraph_collection,
+                           date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_cesar.get_title_tag => "Cesar"})
+  I18n.backend.store_translations(locale, {p_cesar.get_body_tag => "From Guatemala."})
+end
+
+
+
+home_work_paragraph_collection = ParagraphCollection.create(page: home_page,
+                                                             section: "work",
+                                                             picture_mode: :any,
+                                                             has_date: false,
+                                                             has_caption: true)
+p_credits = Paragraph.create(paragraph_collection: home_work_paragraph_collection,
+                             date: Date.today)
+
+[:de, :en, :es].each do |locale|
+  I18n.backend.store_translations(locale, {p_credits.get_title_tag => "Micro finance"})
+  I18n.backend.store_translations(locale, {p_credits.get_body_tag => "Over 100 women participated on this project."})
+end
+
+p_education = Paragraph.create(paragraph_collection: home_work_paragraph_collection,
                                date: Date.today)
 
 [:de, :en, :es].each do |locale|

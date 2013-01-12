@@ -23,7 +23,7 @@ class Paragraph < ActiveRecord::Base
 
   after_initialize :init
   after_create :insert_empty_translation
-  after_save :update_translation
+  after_save :update_translation, :if => :title
   after_destroy :remove_translation
 
   def init

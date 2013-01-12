@@ -21,27 +21,25 @@ Vigu::Application.routes.draw do
         end
       end
 
-      #match 'paragraph_collection/update',       to: 'paragraph_collection#update'
       match 'about',              to: 'about#edit'
       match 'about/update',       to: 'about#update'
-      # match 'news',               to: 'news#index'
-      # match 'news/edit',          to: 'news#edit'
-      # match 'news/new_paragraph', to: 'news#new_paragraph'
-      # match 'news/update',        to: 'news#update'
 
+      match 'home',              to: 'home#edit'
+      match 'home/update',       to: 'home#update'
       match '/',               to: 'home#edit'
-      match 'new_paragraph', to: 'home#new_paragraph'
-      match 'update',        to: 'home#update'
+      match '/home/sort',               to: 'home#sort', :via => :post
+
       match 'switch_to_admin_view',        to: 'application#switch_to_admin_view'
       match 'switch_to_normal_view',        to: 'application#switch_to_normal_view'
     end
 
 
-    root to: "home#index"
+    root to: "home#show"
 
     match 'news',               to: 'news#index'
     match 'partners',               to: 'partners#index'
     match 'about',               to: 'about#show'
+    match 'home',               to: 'home#show'
 
     match '/register',          to: 'users#new'
     match '/login',             to: 'sessions#new'

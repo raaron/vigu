@@ -161,6 +161,7 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    sass (3.2.4)
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
@@ -208,6 +209,7 @@ DEPENDENCIES
   rails-footnotes (>= 3.7.9)
   rb-inotify (~> 0.8.8)
   rspec-rails (= 2.11.0)
+  sass
   spork (= 0.9.0)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)

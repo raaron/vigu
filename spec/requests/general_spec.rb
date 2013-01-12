@@ -31,7 +31,6 @@ describe "General page template" do
     let(:not_have_link_checker) { lambda {|text, url| should_not have_link(text, href: url)} }
 
     def check_always_visible_links
-      should have_link(t(:home), href: root_path)
       should have_link(t(:translations), href: translations_path)
       should have_link('Roadmap', href: development_roadmap_path)
       should have_link("TODO's", href: development_todo_path)
@@ -52,12 +51,14 @@ describe "General page template" do
       check_link(visible_as_admin, t(:news), admin_news_index_path)
       check_link(visible_as_admin, t(:partners), admin_partners_path)
       check_link(visible_as_admin, t(:about_us), admin_about_path)
+      check_link(visible_as_admin, t(:home), admin_home_path)
       check_link(visible_as_admin, t(:users), users_path)
       check_link(visible_as_admin, t(:admin), admin_path)
 
       check_link(invisible_as_admin, t(:news), news_path)
       check_link(invisible_as_admin, t(:partners), partners_path)
       check_link(invisible_as_admin, t(:about_us), about_path)
+      check_link(invisible_as_admin, t(:home), home_path)
     end
 
     def check_logged_in_links(is_logged_in, user=nil)

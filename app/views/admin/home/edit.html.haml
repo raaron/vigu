@@ -1,2 +1,32 @@
 - provide(:title, admin_title(t(:home)))
-= paragraphs_form(admin_new_paragraph_path, admin_update_path)
+- provide(:normal_view_link, home_path)
+
+- def get_admin_title_input(text, form)
+  - return admin_line_input(symbol="#{text}_title", translation_tag="home_#{text}_title", css_class="input_title", form=form)
+
+- def get_admin_input(text, form)
+  - return admin_line_input(symbol=text, translation_tag=text, css_class="input_normal", form=form)
+
+
+= form_for @page, :url => admin_home_update_path, :html => { :multipart => true, :name => "savable_form" } do |page_builder|
+
+  %table
+    = get_admin_title_input("page", page_builder)
+    = get_admin_title_input("people", page_builder)
+
+  - @paragraph_collection = @people_collection
+  = render_partial(:paragraphs_form, {:form => page_builder})
+
+
+  %table
+    = get_admin_title_input("work", page_builder)
+
+  - @paragraph_collection = @work_collection
+  = render_partial(:paragraphs_form, {:form => page_builder})
+
+  %table
+    = get_admin_title_input("contact", page_builder)
+
+  %br
+
+  = page_builder.submit t(:save), :name => "save_button"

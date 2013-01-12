@@ -24,6 +24,7 @@ group :assets do
 end
 
 gem 'haml'
+gem 'sass'
 gem 'jquery-rails', '2.0.2'
 # gem 'redis'
 gem "paperclip", "~> 3.0"

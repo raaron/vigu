@@ -1,0 +1,16 @@
+- provide(:title, t(:home).capitalize)
+- provide(:admin_view_link, admin_home_path)
+
+%h1= t(:home_page_title)
+
+%h2= t(:home_people_title)
+- @page.get_paragraphs(:people).each do |person|
+  - @paragraph = person
+  = render_partial('paragraph')
+
+%h2= t(:home_work_title)
+- @page.get_paragraphs(:work).each do |project|
+  - @paragraph = project
+  = render_partial('paragraph')
+
+%h2= t(:home_contact_title)
