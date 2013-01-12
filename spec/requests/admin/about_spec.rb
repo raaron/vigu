@@ -53,7 +53,7 @@ describe Admin::AboutController do
   let(:admin_view_path) { admin_about_path }
   let(:corresponding_page)  { Page.find_by_name("about") }
   let(:original_page)  { FactoryGirl.create(:original_about_page) }
-  let(:updated_page)  { FactoryGirl.create(:updated_about_page) }
+  let(:updated_page)  { FactoryGirl.build(:updated_about_page) }
 
 
   subject {page}
